@@ -1,8 +1,8 @@
 CoursesID,Title,Prerequisites,Units
-I&C SCI 6B,Boolean Logicand DiscreteStructures,,4
+I&C SCI 6B,Boolean Logicand Discrete Structures,,4
 I&C SCI 6D,Discrete Mathematics for Computer Science,,4
-IN4MATX 43,Introduction to SoftwareEngineering,,4
-STATS 67,Introduction to Probability and Statisticsfor Computer Science,,4
+IN4MATX 43,Introduction to Software Engineering,,4
+STATS 67,Introduction to Probability and Statistics for Computer Science,,4
 COMPSCI 122A,Introduction to Data Management,,4
 COMPSCI 143A,Principles of Operating Systems,,4
 COMPSCI 132,Computer Networks,STATS 67,4

@@ -17,7 +17,7 @@ def read_csv_to_dict(path: str) -> dict:
     return course_dict
 
 
-def class_tree_adj_list(course_dict: dict) -> dict:
+def create_adj_list(course_dict: dict) -> dict:
     adj_list = {}
 
     for course_id, (_, prerequisites_list, _) in course_dict.items():
@@ -26,7 +26,7 @@ def class_tree_adj_list(course_dict: dict) -> dict:
     return adj_list
 
 
-def graph_relationships(adj_list: dict) -> None:
+def graph_prereq_relationship(adj_list: dict) -> None:
     G = nx.Graph()
 
     G.add_nodes_from(adj_list.keys())
