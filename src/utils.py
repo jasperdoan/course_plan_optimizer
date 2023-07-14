@@ -38,33 +38,26 @@ def create_dag(course_dict: dict) -> dict:
     return dag
 
 
-def level_order_traversal(adj_list: dict) -> list:
-    dags = []
+def label_levels(adjacency_list: dict) -> dict:
+    levels = {}
     visited = set()
+    queue = deque()
 
-    def bfs(course):
-        dag = {}
-        queue = deque([(course, 0)])
+    start_node = next(iter(adjacency_list.keys()))
+    queue.append((start_node, 0))  # Add the start node with level 0
+    visited.add(start_node)
+    levels[start_node] = 0
 
-        while queue:
-            current, level = queue.popleft()
+    while queue:
+        node, level = queue.popleft()
+        
+        for neighbor in adjacency_list[node]:
+            if neighbor not in visited:
+                queue.append((neighbor, level + 1))
+                visited.add(neighbor)
+                levels[neighbor] = level + 1
 
-            if current not in dag:
-                dag[current] = level
-            visited.add(current)
-
-            for prerequisite in adj_list[current]:
-                if prerequisite not in visited:
-                    queue.append((prerequisite, level + 1))
-
-        return dag
-
-    for course in adj_list:
-        if course not in visited:
-            dag = bfs(course)
-            dags.append(dag)
-
-    return dags
+    return levels
 
 
 def graph_relationship(dag: dict) -> None:
