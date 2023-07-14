@@ -38,26 +38,40 @@ def create_dag(course_dict: dict) -> dict:
     return dag
 
 
-def label_levels(adjacency_list: dict) -> dict:
-    levels = {}
-    visited = set()
-    queue = deque()
+def create_mult_dag(adjacency_list: dict) -> list:
+    def label_levels(adj_list: dict) -> dict:
+        levels = {}
+        visited = set()
+        queue = deque()
 
-    start_node = next(iter(adjacency_list.keys()))
-    queue.append((start_node, 0))  # Add the start node with level 0
-    visited.add(start_node)
-    levels[start_node] = 0
+        start_node = next(iter(adj_list.keys()))
+        queue.append((start_node, 0))  # Add the start node with level 0
+        visited.add(start_node)
+        levels[start_node] = 0
 
-    while queue:
-        node, level = queue.popleft()
-        
-        for neighbor in adjacency_list[node]:
-            if neighbor not in visited:
-                queue.append((neighbor, level + 1))
-                visited.add(neighbor)
-                levels[neighbor] = level + 1
+        while queue:
+            node, level = queue.popleft()
+            
+            for neighbor in adj_list[node]:
+                if neighbor not in visited:
+                    queue.append((neighbor, level + 1))
+                    visited.add(neighbor)
+                    levels[neighbor] = level + 1
 
-    return levels
+        return levels
+    
+    mult_dag = []
+    al_copy = adjacency_list.copy()
+
+    for i, (k, v) in enumerate(adjacency_list.items()):
+        mult_dag.append(label_levels(al_copy))
+        al_copy.pop(k)
+        al_copy[k] = v
+        if i > len(adjacency_list):
+            break
+    mult_dag = [dag for dag in mult_dag if len(dag) > 1]
+
+    return mult_dag
 
 
 def graph_relationship(dag: dict) -> None:
