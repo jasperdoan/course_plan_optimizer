@@ -62,3 +62,9 @@ def graph_prereq_relationship(adj_list: dict) -> None:
         node_size=1000
     )
     plt.show()
+
+
+def topological_sort(adj_list):
+    graph = nx.DiGraph(adj_list)
+    sorted_classes = list(nx.topological_sort(graph))
+    return sorted_classes
