@@ -17,13 +17,24 @@ def read_csv_to_dict(path: str) -> dict:
     return course_dict
 
 
-def create_adj_list(course_dict: dict) -> dict:
+def prereq_tree(course_dict: dict) -> dict:
     adj_list = {}
 
     for course_id, (_, prerequisites_list, _) in course_dict.items():
         adj_list[course_id] = prerequisites_list
 
     return adj_list
+
+
+def course_option_tree(adj_list: dict) -> dict:
+    course_tree = adj_list.copy()        
+
+    for course, prereq_list in adj_list.items():
+        course_tree[course] = []
+        for prereq in prereq_list:
+            course_tree[prereq].append(course)
+        
+    return course_tree
 
 
 def graph_prereq_relationship(adj_list: dict) -> None:

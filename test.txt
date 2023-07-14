@@ -38,27 +38,39 @@ Senior:
 
 
 
-Low level courses
-    COMPSCI 143A
-    COMPSCI 145
-    IN4MATX 102
-    IN4MATX 101
+Junior:
+    Fall:
+        I&C SCI 6B
+        COMPSCI 122A
+        IN4MATX 43*
+        STATS 67*
 
-Networks
-    IN4MATX 148
-    COMPSCI 132
-    IN4MATX 124
+    Winter:
+        I&C SCI 6D
+        I&C SCI 139W*
+        IN4MATX 101
+        IN4MATX 113
 
-Software Design
-    IN4MATX 122
-    IN4MATX 121
-    IN4MATX 131
-    IN4MATX 115
-    IN4MATX 113
-    IN4MATX 151
-    IN4MATX 191A
-    IN4MATX 191B
+    Spring:
+        IN4MATX 102
+        IN4MATX 115
+        IN4MATX 121
+        IN4MATX 122
 
-Data Structure
-    COMPSCI 161
-    COMPSCI 165
+Senior:
+    Fall:
+        IN4MATX 131
+        IN4MATX 148
+        IN4MATX 151
+        COMPSCI 132
+
+    Winter:
+        IN4MATX 124
+        IN4MATX 191A
+        COMPSCI 161
+        COMPSCI 143A
+
+    Spring:
+        IN4MATX 191B
+        COMPSCI 165
+        COMPSCI 145
