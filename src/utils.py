@@ -10,61 +10,56 @@ def read_csv_to_dict(path: str) -> dict:
     for _, row in df.iterrows():
         course_id = row['CoursesID']
         title = row['Title']
-        prerequisites = row['Prerequisites']
+        prereq = row['Prerequisites']
         units = row['Units']
-        prerequisites_list = [] if pd.isnull(prerequisites) else prerequisites.split('+')
-        course_dict[course_id] = (title, prerequisites_list, units)
+        prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
+        course_dict[course_id] = (title, prereq_list, units)
 
     return course_dict
 
 
-def prereq_adjlist(course_dict: dict) -> dict:
-    adj_list = {}
-
-    for course_id, (_, prerequisites_list, _) in course_dict.items():
-        adj_list[course_id] = prerequisites_list
-
-    return adj_list
+def prereq_dag(course_dict: dict) -> dict:
+    return {k: l for k, (_, l, _) in course_dict.items()}
 
 
-def create_dag(course_dict: dict) -> dict:
+def forward_dag(course_dict: dict) -> dict:
     dag = {}
-
-    for course_id, (_, prerequisites_list, _) in course_dict.items():
-        dag[course_id] = []
-        for prereq in prerequisites_list:
-            dag[prereq].append(course_id)
+    
+    for cid, (_, prereqs, _) in course_dict.items():
+        dag.setdefault(cid, [])
+        for p in prereqs:
+            dag.setdefault(p, [])
+            dag[p].append(cid)
 
     return dag
 
 
-def create_mult_dag(adjacency_list: dict) -> list:
-    def label_levels(adj_list: dict) -> dict:
+def dag_leveler(adjacency_list: dict) -> list:
+    def bfs(adj_list: dict) -> dict:
         levels = {}
         visited = set()
-        queue = deque()
+        q = deque()
 
-        start_node = next(iter(adj_list.keys()))
-        queue.append((start_node, 0))  # Add the start node with level 0
-        visited.add(start_node)
-        levels[start_node] = 0
+        snode = next(iter(adj_list.keys()))
+        q.append((snode, 0))  # Add the start node with level 0
+        visited.add(snode)
+        levels[snode] = 0
 
-        while queue:
-            node, level = queue.popleft()
-            
-            for neighbor in adj_list[node]:
-                if neighbor not in visited:
-                    queue.append((neighbor, level + 1))
-                    visited.add(neighbor)
-                    levels[neighbor] = level + 1
-
+        while q:
+            node, i = q.popleft()
+            for n in adj_list[node]:
+                if n not in visited:
+                    q.append((n, i + 1))
+                    visited.add(n)
+                    levels[n] = i + 1
+                    
         return levels
     
     mult_dag = []
     al_copy = adjacency_list.copy()
 
     for i, (k, v) in enumerate(adjacency_list.items()):
-        mult_dag.append(label_levels(al_copy))
+        mult_dag.append(bfs(al_copy))
         al_copy.pop(k)
         al_copy[k] = v
         if i > len(adjacency_list):
@@ -101,19 +96,19 @@ def graph_relationship(dag: dict) -> None:
 
 
 def topological_sort(dag: dict) -> list:
-    def dfs(course):
+    def dfs(course: str) -> None:
         visited.add(course)
-        for prerequisite in dag[course]:
-            if prerequisite not in visited:
-                dfs(prerequisite)
-        topological_order.append(course)
+        for prereq in dag[course]:
+            if prereq not in visited:
+                dfs(prereq)
+        topo_order.append(course)
 
     visited = set()
-    topological_order = []
+    topo_order = []
 
     for course in dag:
         if course not in visited:
             dfs(course)
 
-    topological_order.reverse()
-    return topological_order
+    topo_order.reverse()
+    return topo_order

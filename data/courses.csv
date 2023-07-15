@@ -2,7 +2,6 @@ CoursesID,Title,Prerequisites,Units
 I&C SCI 6B,Boolean Logicand Discrete Structures,,4
 I&C SCI 6D,Discrete Mathematics for Computer Science,,4
 I&C SCI 139W,Critical Writing on Information Technology,,4
-IN4MATX 43,Introduction to Software Engineering,,4
 STATS 67,Introduction to Probability and Statistics for Computer Science,,4
 COMPSCI 122A,Introduction to Data Management,,4
 COMPSCI 143A,Principles of Operating Systems,,4
@@ -10,6 +9,7 @@ COMPSCI 132,Computer Networks,STATS 67,4
 COMPSCI 145,Embedded Software,,6
 COMPSCI 161,Design and Analysis of Algorithms,I&C SCI 6B+I&C SCI 6D,4
 COMPSCI 165,Project in Algorithms and Data Structures,COMPSCI 161,4
+IN4MATX 43,Introduction to Software Engineering,,4
 IN4MATX 101,Concepts in Programming Languages I,,4
 IN4MATX 102,Concepts of Programming Language II,IN4MATX 101,4
 IN4MATX 113,Requirements Analysis and Engineering,IN4MATX 43,4
