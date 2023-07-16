@@ -1,14 +1,14 @@
 Junior:
     Fall:
         I&C SCI 6B
-        I&C SCI 6D
+        COMPSCI 122A
         IN4MATX 43*
         STATS 67*
 
     Winter:
-        COMPSCI 122A*
-        COMPSCI 132
+        I&C SCI 6D
         I&C SCI 139W*
+        COMPSCI 132
         IN4MATX 115
 
     Spring:

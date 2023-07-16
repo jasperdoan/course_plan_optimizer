@@ -112,3 +112,60 @@ def topological_sort(dag: dict) -> list:
 
     topo_order.reverse()
     return topo_order
+
+
+def combine_dags(mult_dag: list) -> list:
+    # # Remove duplicate DAGs
+    # smallest_dag_idx = [
+    #     i for i, dag in enumerate(mult_dag) 
+    #     if len(dag) == min(len(d) for d in mult_dag)
+    # ]
+    
+    # for idx in reversed(smallest_dag_idx):
+    #     for i, dag in enumerate(mult_dag):
+    #         if i == idx:
+    #             continue
+    #         intersect = list(set(dag).intersection(mult_dag[idx]))
+    #         intersect.sort()
+
+    #         if intersect == list(mult_dag[idx].keys()):
+    #             mult_dag.pop(idx)
+    #             break
+
+    ## Remove duplicate DAGs IMPROVED
+    idxs = []
+    for i, d1 in enumerate(mult_dag):
+        for j, d2 in enumerate(mult_dag):
+            if i == j:
+                continue
+            
+            if set(d1.keys()).issubset(set(d2.keys())):
+                idxs.append(i)
+                break
+
+    for idx in reversed(idxs):
+        mult_dag.pop(idx)
+
+    return mult_dag
+
+
+
+
+test = [
+    {'I&C SCI 6B': 0, 'COMPSCI 161': 1, 'COMPSCI 165': 2},
+    {'I&C SCI 6D': 0, 'COMPSCI 161': 1, 'COMPSCI 165': 2},
+    {'STATS 67': 0, 'COMPSCI 132': 1, 'IN4MATX 124': 2},
+    {'COMPSCI 132': 0, 'IN4MATX 124': 1},
+    {'COMPSCI 161': 0, 'COMPSCI 165': 1},
+    {'IN4MATX 43': 0, 'IN4MATX 113': 1, 'IN4MATX 115': 1, 'IN4MATX 151': 1, 'IN4MATX 191A': 2, 'IN4MATX 191B': 3},
+    {'IN4MATX 101': 0, 'IN4MATX 102': 1, 'IN4MATX 122': 1},
+    {'IN4MATX 113': 0, 'IN4MATX 191A': 1, 'IN4MATX 191B': 2},
+    {'IN4MATX 121': 0, 'IN4MATX 191A': 1, 'IN4MATX 191B': 2},
+    {'IN4MATX 131': 0, 'IN4MATX 191A': 1, 'IN4MATX 191B': 2},
+    {'IN4MATX 151': 0, 'IN4MATX 191A': 1, 'IN4MATX 191B': 2},
+    {'IN4MATX 191A': 0, 'IN4MATX 191B': 1}
+]
+
+l = combine_dags(test)
+for i in l:
+    print(i)
