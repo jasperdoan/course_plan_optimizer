@@ -11,26 +11,26 @@ class CoursePlanner:
     semesters_per_year: int
     max_units_per_semester: int
     data_path: str
-    _course_dict: dict = None
-    _prereq_dag: dict = None
-    _forward_dag: dict = None
+    _cdict: dict = None
+    _pdag: dict = None
+    _fdag: dict = None
 
     @property
     def course_dict(self) -> dict:
-        return self._course_dict
+        return self._cdict
     
     @property
     def prereq_dag(self) -> dict:
-        return self._prereq_dag
+        return self._pdag
     
     @property
     def forward_dag(self) -> dict:
-        return self._forward_dag
+        return self._fdag
 
     def __post_init__(self):
-        self._course_dict = self.__read_csv_to_dict()
-        self._prereq_dag = self.__prereq_dag(self._course_dict)
-        self._forward_dag = self.__forward_dag(self._course_dict)
+        self._cdict = self.__read_csv_to_dict()
+        self._pdag = self.__build_pdag(self._cdict)
+        self._fdag = self.__build_fdag(self._cdict)
 
     def __read_csv_to_dict(self) -> dict:
         df = pd.read_csv(self.data_path)
@@ -47,11 +47,11 @@ class CoursePlanner:
         return course_dict
 
 
-    def __prereq_dag(self, course_dict: dict) -> dict:
+    def __build_pdag(self, course_dict: dict) -> dict:
         return {k: l for k, (_, l, _) in course_dict.items()}
 
 
-    def __forward_dag(self, course_dict: dict) -> dict:
+    def __build_fdag(self, course_dict: dict) -> dict:
         dag = {}
         
         for cid, (_, prereqs, _) in course_dict.items():
@@ -61,6 +61,23 @@ class CoursePlanner:
                 dag[p].append(cid)
 
         return dag
+    
+    def __topological_sort(self, dag: dict) -> dict:
+        def dfs(course: str) -> None:
+            visited.add(course)
+            for prereq in dag[course]:
+                if prereq not in visited:
+                    dfs(prereq)
+            topo_order[course] = dag[course]
+
+        visited = set()
+        topo_order = {}
+
+        for course in dag:
+            if course not in visited:
+                dfs(course)
+
+        return topo_order
 
 
     def dag_leveler(self) -> list:
@@ -85,13 +102,13 @@ class CoursePlanner:
             return levels
         
         mult_dag = []
-        al_copy = self._forward_dag.copy()
+        al_copy = self._fdag.copy()
 
-        for i, (k, v) in enumerate(self._forward_dag.items()):
+        for i, (k, v) in enumerate(self._fdag.items()):
             mult_dag.append(bfs(al_copy))
             al_copy.pop(k)
             al_copy[k] = v
-            if i > len(self._forward_dag):
+            if i > len(self._fdag):
                 break
         mult_dag = [dag for dag in mult_dag if len(dag) > 1]
 
@@ -112,10 +129,12 @@ class CoursePlanner:
 
 
     def graph_relationship(self) -> None:
-        G = nx.Graph()
-        G.add_nodes_from(self._forward_dag.keys())
+        dag = self.__topological_sort(self._pdag)
 
-        for n, edges in self._forward_dag.items():
+        G = nx.Graph()
+        G.add_nodes_from(dag.keys())
+
+        for n, edges in dag.items():
             for e in edges:
                 G.add_edge(n, e)
 
@@ -137,20 +156,3 @@ class CoursePlanner:
         plt.show()
 
 
-    def topological_sort(self) -> list:
-        def dfs(course: str) -> None:
-            visited.add(course)
-            for prereq in self._forward_dag[course]:
-                if prereq not in visited:
-                    dfs(prereq)
-            topo_order.append(course)
-
-        visited = set()
-        topo_order = []
-
-        for course in self._forward_dag:
-            if course not in visited:
-                dfs(course)
-
-        topo_order.reverse()
-        return topo_order
