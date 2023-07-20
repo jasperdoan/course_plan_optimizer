@@ -1,5 +1,5 @@
 from planner import CoursePlanner
-from scraper import CourseScraper
+from scraper import scrape_avail_listings
 
 def main():
     plan = CoursePlanner(
@@ -14,13 +14,14 @@ def main():
     #     print(course, info)
 
     # plan.graph_relationship()
+    
 
+    cs_2023 = scrape_avail_listings(year=2023, department='CS')
+    inf_2023 = scrape_avail_listings(year=2023, department='INF')
 
-    cs_2023 = CourseScraper(year=2023, level='ALL', department='CS', program='ALL')
-    inf_2023 = CourseScraper(year=2023, level='ALL', department='INF', program='ALL')
-
-    avail_dict = {**cs_2023.course_availability, **inf_2023.course_availability}
+    avail_dict = {**cs_2023, **inf_2023}
     course_dict = plan.course_dict
+
 
     # Display Info
     print('All Courses:\n', '-'*100)

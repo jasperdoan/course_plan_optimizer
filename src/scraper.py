@@ -1,54 +1,51 @@
 from urllib.request import urlopen
-from dataclasses import dataclass
+from typing import NamedTuple
 
-@dataclass
-class CourseScraper:
-    year: int
-    level: str
-    department: str
-    program: str
 
-    @property
-    def course_availability(self) -> dict:
-        return self._course_availability
-    
-    def __post_init__(self):
-        self._url = f'https://www.ics.uci.edu/ugrad/courses/listing-course.php?year={self.year}&level={self.level}&department={self.department}&program={self.program}'
-        
-        self._html = urlopen(self._url).read().decode('utf-8')
-        self._sindex = self._html.find('["id":protected]=>')
-        self._eindex = self._html.find('["description":protected]=>', self._sindex)
-        self._course_availability = {}
-        self.__scrape()
+class UCIScaperIdentifier(NamedTuple):
+    url_link: str = f'https://www.ics.uci.edu/ugrad/courses/listing-course.php'
+    decoder: str = 'utf-8'
+    stable: str = '["id":protected]=>'
+    estable: str = '["description":protected]=>'
+    avail: str = '["cores":protected]=>'
+    sessions: list = ['Fall', 'Winter', 'Spring']
+    course_idx: str = 'string('
 
-    def __scrape(self) -> None:
-        while True:
-            if self._sindex == -1 or self._eindex == -1:
-                break
 
-            aval_idx = self._html[self._sindex:self._html.find('["cores":protected]=>', self._sindex)]
-            SESSIONS = ['Fall', 'Winter', 'Spring']
-            availability = []
-            for session in SESSIONS:
-                if session in aval_idx:
-                    availability.append(session)
+def scrape_avail_listings(year: int, department: str, level: str = 'ALL', program: str = 'ALL') -> dict:
+    uid = UCIScaperIdentifier()
+    url = f'{uid.url_link}?year={year}&level={level}&department={department}&program={program}'
+    html = urlopen(url).read().decode(uid.decoder)
+    sidx = html.find(uid.stable)
+    eidx = html.find(uid.estable, sidx)
 
-            info = self._html[self._sindex:self._eindex]
+    def strip(string: str) -> str:
+        return string.replace('"', '').replace(' ', '').replace('\n', '')
 
-            course_idx = info.find('string(')
-            course_idx = info.find('string(', course_idx + 1)
-            course_title = info[course_idx + 11:course_idx + 15]
-            course_title = course_title.replace('"', '')
-            course_title = course_title.replace(' ', '')
-            course_title = course_title.replace('\n', '')
+    course_availability = {}
 
-            cnum_idx = info.find('string(', course_idx + 1)
-            course_num = info[cnum_idx + 10:cnum_idx + 16]
-            course_num = course_num.replace('"', '')
-            course_num = course_num.replace(' ', '')
-            course_num = course_num.replace('\n', '')
+    while True:
+        if sidx == -1 or eidx == -1:
+            break
 
-            self._course_availability[course_title + ' ' + course_num] = availability
+        aval_idx = html[sidx:html.find(uid.avail, sidx)]
+        availability = [f'{s} {year}' for s in uid.sessions if s in aval_idx]
 
-            self._sindex = self._html.find('["id":protected]=>', self._eindex)
-            self._eindex = self._html.find('["description":protected]=>', self._sindex)
+        info = html[sidx:eidx]
+
+        cidx = info.find(uid.course_idx)    # Skip first instance
+
+        cidx = info.find(uid.course_idx, cidx + 1)
+        ctitle = info[cidx + 11:cidx + 15]
+        ctitle = strip(ctitle)
+
+        nidx = info.find(uid.course_idx, cidx + 1)
+        cnum = info[nidx + 10:nidx + 16]
+        cnum = strip(cnum)
+
+        course_availability[ctitle + ' ' + cnum] = availability
+
+        sidx = html.find(uid.stable, eidx)
+        eidx = html.find(uid.estable, sidx)
+
+    return course_availability
