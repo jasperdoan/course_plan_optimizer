@@ -62,7 +62,7 @@ class CoursePlanner:
 
         return dag
     
-    def __topological_sort(self, dag: dict) -> dict:
+    def topological_sort(self, dag: dict) -> dict:
         def dfs(course: str) -> None:
             visited.add(course)
             for prereq in dag[course]:
@@ -129,7 +129,7 @@ class CoursePlanner:
 
 
     def graph_relationship(self) -> None:
-        dag = self.__topological_sort(self._pdag)
+        dag = self.topological_sort(self._pdag)
 
         G = nx.Graph()
         G.add_nodes_from(dag.keys())

@@ -2,76 +2,39 @@ Junior:
     Fall:
         I&C SCI 6B
         COMPSCI 122A
-        IN4MATX 43*
-        STATS 67*
+        IN4MATX 43
+        STATS 67
 
     Winter:
         I&C SCI 6D
-        I&C SCI 139W*
-        COMPSCI 132
-        IN4MATX 115
-
-    Spring:
-        IN4MATX 113*
-        IN4MATX 121
-        IN4MATX 124
-        IN4MATX 148
-
-Senior:
-    Fall:
-        COMPSCI 161
-        IN4MATX 101*
-        IN4MATX 151
-        IN4MATX 131
-
-    Winter:
-        COMPSCI 143A
-        COMPSCI 165
-        IN4MATX 191A
-        IN4MATX 102
-
-    Spring:
-        COMPSCI 145
-        IN4MATX 122
-        IN4MATX 191B
-
-
-----------------------------
-
-
-Junior:
-    Fall:
-        I&C SCI 6B
-        COMPSCI 122A
-        IN4MATX 43*
-        STATS 67*
-
-    Winter:
-        I&C SCI 6D
-        I&C SCI 139W*
+        I&C SCI 139W
         IN4MATX 101
         IN4MATX 113
 
     Spring:
-        IN4MATX 102
         IN4MATX 115
-        IN4MATX 121
-        IN4MATX 122
+        COMPSCI 142A
+        COMPSCI 146
+        COMPSCI 143A *(1)
 
 Senior:
     Fall:
-        IN4MATX 131
-        IN4MATX 148
+        IN4MATX 121
         IN4MATX 151
-        COMPSCI 132
+        IN4MATX 131
+        COMPSCI 132 *(1)
+        
 
     Winter:
+        IN4MATX 122
         IN4MATX 124
         IN4MATX 191A
         COMPSCI 161
-        COMPSCI 143A
 
     Spring:
-        IN4MATX 191B
         COMPSCI 165
+        IN4MATX 191B
         COMPSCI 145
+
+
+* (1) Swap if or other is full
