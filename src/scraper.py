@@ -2,7 +2,7 @@ from urllib.request import urlopen
 from dataclasses import dataclass
 
 @dataclass
-class AvailabilityScraper:
+class CourseScraper:
     year: int
     level: str
     department: str
@@ -35,9 +35,12 @@ class AvailabilityScraper:
 
             info = self._html[self._sindex:self._eindex]
 
-            course_idx = info.find('string(3) ')
-            course_idx = info.find('string(3) ', course_idx + 1)
-            course_title = info[course_idx + 11:course_idx + 14]
+            course_idx = info.find('string(')
+            course_idx = info.find('string(', course_idx + 1)
+            course_title = info[course_idx + 11:course_idx + 15]
+            course_title = course_title.replace('"', '')
+            course_title = course_title.replace(' ', '')
+            course_title = course_title.replace('\n', '')
 
             cnum_idx = info.find('string(', course_idx + 1)
             course_num = info[cnum_idx + 10:cnum_idx + 16]

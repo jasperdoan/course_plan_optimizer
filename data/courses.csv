@@ -1,24 +1,24 @@
 CoursesID,Title,Prerequisites,Units
-I&C SCI 6B,Boolean Logicand Discrete Structures,,4
-I&C SCI 6D,Discrete Mathematics for Computer Science,,4
-I&C SCI 139W,Critical Writing on Information Technology,,4
+ICS 6B,Boolean Logicand Discrete Structures,,4
+ICS 6D,Discrete Mathematics for Computer Science,,4
+ICS 139W,Critical Writing on Information Technology,,4
 STATS 67,Introduction to Probability and Statistics for Computer Science,,4
-COMPSCI 122A,Introduction to Data Management,,4
-COMPSCI 143A,Principles of Operating Systems,,4
-COMPSCI 132,Computer Networks,STATS 67,4
-COMPSCI 142A*,Compilers and Interpreters,IN4MATX 101,4
-COMPSCI 145*,Embedded Software,,6
-COMPSCI 146*,Programming in Multitasking Operating Systems,,4
-COMPSCI 161,Design and Analysis of Algorithms,I&C SCI 6B+I&C SCI 6D,4
-COMPSCI 165*,Project in Algorithms and Data Structures,COMPSCI 161,4
-IN4MATX 43,Introduction to Software Engineering,,4
-IN4MATX 101,Concepts in Programming Languages I,,4
-IN4MATX 113,Requirements Analysis and Engineering,IN4MATX 43,4
-IN4MATX 115,Software Testing Analysis and Quality Assurance,IN4MATX 43,4
-IN4MATX 121,Software Design: Applications,,4
-IN4MATX 122,Software Design: Structure and Implementation,IN4MATX 101,4
-IN4MATX 124,Internet Applications Engineering,COMPSCI 132,4
-IN4MATX 131,Human Computer Interaction,,4
-IN4MATX 151,Project Management,IN4MATX 43,4
-IN4MATX 191A,Senior Design Project,IN4MATX 121+IN4MATX 131+IN4MATX 151+IN4MATX 113,4
-IN4MATX 191B,Senior Design Project,IN4MATX 191A,4
+CS 122A,Introduction to Data Management,,4
+CS 143A,Principles of Operating Systems,,4
+CS 132,Computer Networks,STATS 67,4
+CS 142A,Compilers and Interpreters,INF 101,4
+CS 145,Embedded Software,,6
+CS 146,Programming in Multitasking Operating Systems,,4
+CS 161,Design and Analysis of Algorithms,ICS 6B+ICS 6D,4
+CS 165,Project in Algorithms and Data Structures,CS 161,4
+INF 43,Introduction to Software Engineering,,4
+INF 101,Concepts in Programming Languages I,,4
+INF 113,Requirements Analysis and Engineering,INF 43,4
+INF 115,Software Testing Analysis and Quality Assurance,INF 43,4
+INF 121,Software Design: Applications,,4
+INF 122,Software Design: Structure and Implementation,INF 101,4
+INF 124,Internet Applications Engineering,CS 132,4
+INF 131,Human Computer Interaction,,4
+INF 151,Project Management,INF 43,4
+INF 191A,Senior Design Project,INF 121+INF 131+INF 151+INF 113,4
+INF 191B,Senior Design Project,INF 191A,4
