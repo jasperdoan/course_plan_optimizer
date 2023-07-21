@@ -29,7 +29,7 @@ def scrape_avail_listings(year: int, department: str, level: str = 'ALL', progra
             break
 
         aval_idx = html[sidx:html.find(uid.avail, sidx)]
-        availability = [f'{s} {year}' for s in uid.sessions if s in aval_idx]
+        availability = [s for s in uid.sessions if s in aval_idx]
 
         info = html[sidx:eidx]
 

@@ -2,26 +2,21 @@ from planner import CoursePlanner
 from scraper import scrape_avail_listings
 
 def main():
-    plan = CoursePlanner(
+    p = CoursePlanner(
         planned_years=2,
         semesters_per_year=3,
         max_units_per_semester=18,
         data_path='data\courses.csv'
     )
 
-    # dag = plan.topological_sort(plan.prereq_dag)
-    # for course, info in dag.items():
-    #     print(course, info)
+    avail_dict = {
+        **scrape_avail_listings(year=2023, department='CS'), 
+        **scrape_avail_listings(year=2023, department='INF')
+    }
 
-    # plan.graph_relationship()
-    
-
-    cs_2023 = scrape_avail_listings(year=2023, department='CS')
-    inf_2023 = scrape_avail_listings(year=2023, department='INF')
-
-    avail_dict = {**cs_2023, **inf_2023}
-    course_dict = plan.course_dict
-
+    course_dict = p.course_dict             # Course Dictionary
+    pdag = p.topological_sort(p.prereq_dag) # Prerequisite DAG
+    dlvl = p.dag_leveler(p.forward_dag)     # DAG Levels
 
     # Display Info
     print('All Courses:\n', '-'*100)
@@ -31,6 +26,25 @@ def main():
         print(f'\tAvailability: {avail_dict[course] if course in avail_dict else []}')
         print('-'*75)
 
+    # Graph Relationships
+    p.graph_relationship()
+
+    # Display DAGs
+    for k, v in pdag.items():
+        print(f'{k}: {v}')
+
+    # Display DAG Levels to find all core courses
+    for item in dlvl:
+        print(item)
+    
 
 if __name__ == '__main__':
     main()
+
+
+# TODO:
+# - Grab all core courses
+# - Add core courses to planner first
+# - Construct all a possible (DFS) based on availability
+# - Add it to a list in [Fall, Winter, Spring]
+# - Display all possible schedules

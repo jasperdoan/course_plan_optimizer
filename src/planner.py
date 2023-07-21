@@ -1,6 +1,7 @@
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+from collections import deque
 from dataclasses import dataclass
 
 
@@ -107,49 +108,49 @@ class CoursePlanner:
         plt.show()
 
 
-    # def dag_leveler(self) -> list:
-    #     def bfs(adj_list: dict) -> dict:
-    #         levels = {}
-    #         visited = set()
-    #         q = deque()
+    def dag_leveler(self, dag) -> list:
+        def bfs(adj_list: dict) -> dict:
+            levels = {}
+            visited = set()
+            q = deque()
 
-    #         snode = next(iter(adj_list.keys()))
-    #         q.append((snode, 0))  # Add the start node with level 0
-    #         visited.add(snode)
-    #         levels[snode] = 0
+            snode = next(iter(adj_list.keys()))
+            q.append((snode, 0))  # Add the start node with level 0
+            visited.add(snode)
+            levels[snode] = 0
 
-    #         while q:
-    #             node, i = q.popleft()
-    #             for n in adj_list[node]:
-    #                 if n not in visited:
-    #                     q.append((n, i + 1))
-    #                     visited.add(n)
-    #                     levels[n] = i + 1
+            while q:
+                node, i = q.popleft()
+                for n in adj_list[node]:
+                    if n not in visited:
+                        q.append((n, i + 1))
+                        visited.add(n)
+                        levels[n] = i + 1
                         
-    #         return levels
+            return levels
         
-    #     mult_dag = []
-    #     al_copy = self._fdag.copy()
+        mult_dag = []
+        al_copy = dag.copy()
 
-    #     for i, (k, v) in enumerate(self._fdag.items()):
-    #         mult_dag.append(bfs(al_copy))
-    #         al_copy.pop(k)
-    #         al_copy[k] = v
-    #         if i > len(self._fdag):
-    #             break
-    #     mult_dag = [dag for dag in mult_dag if len(dag) > 1]
+        for i, (k, v) in enumerate(dag.items()):
+            mult_dag.append(bfs(al_copy))
+            al_copy.pop(k)
+            al_copy[k] = v
+            if i > len(dag):
+                break
+        mult_dag = [d for d in mult_dag if len(d) > 1]
 
-    #     idxs = []
-    #     for i, d1 in enumerate(mult_dag):
-    #         for j, d2 in enumerate(mult_dag):
-    #             if i == j:
-    #                 continue
+        idxs = []
+        for i, d1 in enumerate(mult_dag):
+            for j, d2 in enumerate(mult_dag):
+                if i == j:
+                    continue
                 
-    #             if set(d1.keys()).issubset(set(d2.keys())):
-    #                 idxs.append(i)
-    #                 break
+                if set(d1.keys()).issubset(set(d2.keys())):
+                    idxs.append(i)
+                    break
 
-    #     for idx in reversed(idxs):
-    #         mult_dag.pop(idx)
+        for idx in reversed(idxs):
+            mult_dag.pop(idx)
 
-    #     return mult_dag
+        return mult_dag
