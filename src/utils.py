@@ -93,7 +93,6 @@ def dag_leveler(dag) -> list:
         al_copy[k] = v
         if i > len(dag):
             break
-    mult_dag = [d for d in mult_dag if len(d) > 1]
 
     idxs = []
     for i, d1 in enumerate(mult_dag):
