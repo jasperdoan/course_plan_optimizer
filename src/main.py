@@ -5,16 +5,6 @@ from scraper import *
 from utils import *
 
 
-# TODO: Try to add DFS field snake to logic to see which session makes most sense
-class Session(Enum):
-    FALL0 = 0
-    WINTER0 = 1
-    SPRING0 = 2
-    FALL1 = 3
-    WINTER1 = 4
-    SPRING1 = 5
-
-
 def main():
     p = CoursePlanner('data\courses.csv')
 
@@ -24,31 +14,44 @@ def main():
             for s in ['Fall', 'Winter', 'Spring']
     }
     availability_list = read_csv('data\course_avail.csv')
-    dlvl = dag_leveler(p.forward_dag)
 
     
     courses_avail = {k: availability_list[k] for k, _ in p.course_dict.items()}
     courses_avail = {k: v for k, v in sorted(courses_avail.items(), key=lambda item: len(item[1]))}
+    visited = set()
+
 
     for k, v in courses_avail.items():
         print(f'{k}: {v}')
 
-    # Hard picked core courses
-    schedule['Fall0'] = ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67']
-    schedule['Winter0'] = ['ICS 6D', 'ICS 139W']
+    
+    def dfs(course: str, visited: set, prereq_dag: dict, schedule: dict, courses_avail: dict) -> None:
+        if prereq_dag[course]:
+            for prereq in prereq_dag[course]:
+                if prereq not in visited:
+                    dfs(prereq, visited, prereq_dag, schedule, courses_avail)
+
+        if course in visited:
+            return
+
+        flag = False
+        for i in [0, 1]:
+            for session in courses_avail[course]:
+                if len(schedule[f'{session}{i}']) < 4:
+                    schedule[f'{session}{i}'].append(course)
+                    flag = True
+                    break
+            if flag:
+                break
+
+        visited.add(course)
+            
 
 
-    for x, session in courses_avail.items():
-        for s in session:
-            i = int(bool(p.prereq_dag[x]))
-            schedule[f'{s}{i}'].append(x)
-
-            # DFS logic here
+    for x, _ in courses_avail.items():
+        dfs(x, visited, p.prereq_dag, schedule, courses_avail)
 
 
-        if x == 'CS 145':
-            break
-        
 
     print('-'*50, '\n')
     for k, v in schedule.items():
@@ -60,10 +63,9 @@ if __name__ == '__main__':
 
 
 # TODO:
-# [X] Grab all core courses
-# [X] Add core courses to planner first
+# [ ] DFS within DFS --> Check for prereq while building schedule
+#       Rn its just filling in earliest available slot without prereq check
 # [ ] Construct all a possible (DFS) based on availability
-# [ ] Add it to a list in [Fall, Winter, Spring]
 # [ ] Display all possible schedules
 
 # [ ] Webscape prerequisites instead of manually adding them in csv file
