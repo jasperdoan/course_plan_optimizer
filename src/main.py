@@ -1,5 +1,7 @@
 from planner import CoursePlanner
 from scraper import scrape_avail_listings
+from utils import *
+
 
 def main():
     p = CoursePlanner(
@@ -15,19 +17,14 @@ def main():
     }
 
     course_dict = p.course_dict             # Course Dictionary
-    pdag = p.topological_sort(p.prereq_dag) # Prerequisite DAG
-    dlvl = p.dag_leveler(p.forward_dag)     # DAG Levels
+    pdag = topological_sort(p.prereq_dag) # Prerequisite DAG
+    dlvl = dag_leveler(p.forward_dag)     # DAG Levels
 
     # Display Info
-    print('All Courses:\n', '-'*100)
-    for course, (title, preq, units) in course_dict.items():
-        print(f'{course}: {title} ({units} units)')
-        print(f'\tPrerequisites: {preq}')
-        print(f'\tAvailability: {avail_dict[course] if course in avail_dict else []}')
-        print('-'*75)
+    display_info(course_dict, avail_dict)
 
     # Graph Relationships
-    p.graph_relationship()
+    graph_relationship(pdag)
 
     # Display DAGs
     for k, v in pdag.items():
