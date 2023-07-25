@@ -1,3 +1,4 @@
+import pandas as pd
 from urllib.request import urlopen
 from typing import NamedTuple
 
@@ -49,3 +50,43 @@ def scrape_avail_listings(year: int, department: str, level: str = 'ALL', progra
         eidx = html.find(uid.estable, sidx)
 
     return course_availability
+
+
+def save_csv(file_path: str, data: dict) -> None:
+    for k, v in data.items():
+        data[k] = '+'.join(v)
+
+    df = pd.DataFrame(data.items(), columns=['Course', 'Availability'])
+    df.to_csv(file_path, index=False)
+
+
+def read_csv(file_path: str) -> dict:
+    df = pd.read_csv(file_path)
+    course_dict = {}
+
+    for _, row in df.iterrows():
+        course_id = row['Course']
+        availability = row['Availability']
+        course_dict[course_id] = [] if pd.isnull(availability) else availability.split('+')
+
+    return course_dict
+
+
+
+# avail_dict = {
+#     **scrape_avail_listings(year=2023, department='CS'), 
+#     **scrape_avail_listings(year=2023, department='INF'),
+#     **scrape_avail_listings(year=2023, department='ICS'),
+#     **scrape_avail_listings(year=2023, department='STATS')
+# }
+
+# csv_file_path = 'data\course_avail.csv'
+
+
+# # Change avail_dict.values() from list to string
+# for k, v in avail_dict.items():
+#     avail_dict[k] = '+'.join(v)
+
+
+# df = pd.DataFrame(avail_dict.items(), columns=['Course', 'Availability'])
+# df.to_csv(csv_file_path, index=False)
