@@ -36,7 +36,7 @@ def scrape_avail_listings(year: int, department: str, level: str = 'ALL', progra
         cidx = info.find(uid.course_idx)    # Skip first instance
 
         cidx = info.find(uid.course_idx, cidx + 1)
-        ctitle = info[cidx + 11:cidx + 15]
+        ctitle = info[cidx + 11:cidx + 11 + len(department)]
         ctitle = strip(ctitle)
 
         nidx = info.find(uid.course_idx, cidx + 1)

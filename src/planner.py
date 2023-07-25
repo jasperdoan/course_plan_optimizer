@@ -4,9 +4,6 @@ from dataclasses import dataclass
 
 @dataclass
 class CoursePlanner:
-    planned_years: int
-    semesters_per_year: int
-    max_units_per_semester: int
     data_path: str
     _cdict: dict = None
     _pdag: dict = None
