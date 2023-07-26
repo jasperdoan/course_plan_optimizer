@@ -27,46 +27,43 @@ def main():
     for k, v in courses_avail.items():
         print(f'{k}: {v}')
 
-    
+        
     def dfs(course: str, visited: set, prereq_dag: dict, schedule: dict, courses_avail: dict) -> None:
+        if course in visited:
+            return
+        visited.add(course)
+
         if prereq_dag[course]:
             for prereq in prereq_dag[course]:
                 if prereq not in visited:
                     dfs(prereq, visited, prereq_dag, schedule, courses_avail)
-
-        if course in visited:
-            return
-
-        flag = False
-        if not prereq_dag[course]:
+        else:
             for i in [0, 1]:
                 for session in courses_avail[course]:
                     if len(schedule[f'{session}{i}']) < 4:
                         schedule[f'{session}{i}'].append(course)
-                        flag = True
-                        break
-                if flag:
-                    break
-        else:
-            # Grab latest point in schedule where all prereqs are satisfied
-            # and add course to that point
-            session_score = 0
-            for prereq in prereq_dag[course]:
-                for k, v in schedule.items():
-                    if prereq in v:
-                        session_score = max(session_score, SESSION_VAL[k])
+                        return
 
-            for i in [0, 1]:
-                for session in courses_avail[course]:
-                    if len(schedule[f'{session}{i}']) < 4 and SESSION_VAL[f'{session}{i}'] > session_score:
-                        schedule[f'{session}{i}'].append(course)
-                        flag = True
-                        break
-                if flag:
-                    break         
+        # If the course has prerequisites
+        session_score = -1
+        for prereq in prereq_dag[course]:
+            for k, v in schedule.items():
+                if prereq in v:
+                    session_score = max(session_score, SESSION_VAL[k])
 
-        visited.add(course)
-            
+        for i in [0, 1]:
+            for session in courses_avail[course]:
+                if len(schedule[f'{session}{i}']) < 4 and SESSION_VAL[f'{session}{i}'] > session_score:
+                    schedule[f'{session}{i}'].append(course)
+                    return
+
+
+    schedule['Fall0'] = ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67']
+    schedule['Winter0'] = ['ICS 6D', 'ICS 139W']
+
+    for _, v in schedule.items():
+        for course in v:
+            visited.add(course)            
 
 
     for x, _ in courses_avail.items():
