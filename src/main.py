@@ -4,18 +4,54 @@ from scraper import *
 from utils import *
 
 
+SESSION_VAL = {
+    f'{s}{i}': i*3 + idx 
+        for i in [0, 1]
+        for idx, s in enumerate(['Fall', 'Winter', 'Spring']) 
+}
+
+def dfs(course: str, visited: set, prereq_dag: dict, forward_dag: dict, schedule: dict, courses_avail: dict) -> None:
+    if course in visited:
+        return
+    visited.add(course)
+
+    if prereq_dag[course]:
+        for prereq in prereq_dag[course]:
+            if prereq not in visited:
+                dfs(prereq, visited, prereq_dag, forward_dag, schedule, courses_avail)
+    else:
+        for i in [0, 1]:
+            for session in courses_avail[course]:
+                if len(schedule[f'{session}{i}']) < 4:
+                    schedule[f'{session}{i}'].append(course)
+                    return
+
+    # If the course has prerequisites
+    min_score_window = -1
+    for prereq in prereq_dag[course]:
+        for k, v in schedule.items():
+            if prereq in v:
+                min_score_window = max(min_score_window, SESSION_VAL[k])
+    # Check forwards dag
+    max_score_window = 6
+    for next_course in forward_dag[course]:
+        for k, v in schedule.items():
+            if next_course in v:
+                max_score_window = min(max_score_window, SESSION_VAL[k])
+    
+    for i in [0, 1]:
+        for session in courses_avail[course]:
+            window = SESSION_VAL[f'{session}{i}'] > min_score_window and SESSION_VAL[f'{session}{i}'] < max_score_window
+            if len(schedule[f'{session}{i}']) < 4 and window:
+                schedule[f'{session}{i}'].append(course)
+                return
+            
+
 def main():
     p = CoursePlanner('data\courses.csv')
 
-    SESSION_VAL = {
-        'Fall0': 0, 'Winter0': 1, 'Spring0': 2, 
-        'Fall1': 3, 'Winter1': 4, 'Spring1': 5
-    }
-    schedule = {
-        f'{s}{y}': [] 
-            for y in [0, 1] 
-            for s in ['Fall', 'Winter', 'Spring']
-    }
+    schedule = {k: [] for k in SESSION_VAL.keys()}
+
     availability_list = read_csv('data\course_avail.csv')
 
     
@@ -24,42 +60,14 @@ def main():
     visited = set()
 
 
-    for k, v in courses_avail.items():
-        print(f'{k}: {v}')
-
-        
-    def dfs(course: str, visited: set, prereq_dag: dict, schedule: dict, courses_avail: dict) -> None:
-        if course in visited:
-            return
-        visited.add(course)
-
-        if prereq_dag[course]:
-            for prereq in prereq_dag[course]:
-                if prereq not in visited:
-                    dfs(prereq, visited, prereq_dag, schedule, courses_avail)
-        else:
-            for i in [0, 1]:
-                for session in courses_avail[course]:
-                    if len(schedule[f'{session}{i}']) < 4:
-                        schedule[f'{session}{i}'].append(course)
-                        return
-
-        # If the course has prerequisites
-        session_score = -1
-        for prereq in prereq_dag[course]:
-            for k, v in schedule.items():
-                if prereq in v:
-                    session_score = max(session_score, SESSION_VAL[k])
-
-        for i in [0, 1]:
-            for session in courses_avail[course]:
-                if len(schedule[f'{session}{i}']) < 4 and SESSION_VAL[f'{session}{i}'] > session_score:
-                    schedule[f'{session}{i}'].append(course)
-                    return
+    # for k, v in courses_avail.items():
+    #     print(f'{k}: {v}')
 
 
+    # Hard picked core classes
     schedule['Fall0'] = ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67']
     schedule['Winter0'] = ['ICS 6D', 'ICS 139W']
+    # schedule['Winter1'] = ['INF 191A']
 
     for _, v in schedule.items():
         for course in v:
@@ -67,13 +75,15 @@ def main():
 
 
     for x, _ in courses_avail.items():
-        dfs(x, visited, p.prereq_dag, schedule, courses_avail)
+        dfs(x, visited, p.prereq_dag, p.forward_dag, schedule, courses_avail)
 
 
 
     print('-'*50, '\n')
     for k, v in schedule.items():
         print(f'{k}: {v}')
+    print()
+    print('-'*50, '\n')
 
 
 if __name__ == '__main__':
