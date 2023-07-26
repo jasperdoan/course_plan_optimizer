@@ -1,5 +1,4 @@
 
-from enum import Enum
 from planner import CoursePlanner
 from scraper import *
 from utils import *
@@ -8,6 +7,10 @@ from utils import *
 def main():
     p = CoursePlanner('data\courses.csv')
 
+    SESSION_VAL = {
+        'Fall0': 0, 'Winter0': 1, 'Spring0': 2, 
+        'Fall1': 3, 'Winter1': 4, 'Spring1': 5
+    }
     schedule = {
         f'{s}{y}': [] 
             for y in [0, 1] 
@@ -35,14 +38,32 @@ def main():
             return
 
         flag = False
-        for i in [0, 1]:
-            for session in courses_avail[course]:
-                if len(schedule[f'{session}{i}']) < 4:
-                    schedule[f'{session}{i}'].append(course)
-                    flag = True
+        if not prereq_dag[course]:
+            for i in [0, 1]:
+                for session in courses_avail[course]:
+                    if len(schedule[f'{session}{i}']) < 4:
+                        schedule[f'{session}{i}'].append(course)
+                        flag = True
+                        break
+                if flag:
                     break
-            if flag:
-                break
+        else:
+            # Grab latest point in schedule where all prereqs are satisfied
+            # and add course to that point
+            session_score = 0
+            for prereq in prereq_dag[course]:
+                for k, v in schedule.items():
+                    if prereq in v:
+                        session_score = max(session_score, SESSION_VAL[k])
+
+            for i in [0, 1]:
+                for session in courses_avail[course]:
+                    if len(schedule[f'{session}{i}']) < 4 and SESSION_VAL[f'{session}{i}'] > session_score:
+                        schedule[f'{session}{i}'].append(course)
+                        flag = True
+                        break
+                if flag:
+                    break         
 
         visited.add(course)
             
