@@ -66,8 +66,8 @@ def main():
 
     # Hard picked core classes
     schedule['Fall0'] = ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67']
-    schedule['Winter0'] = ['ICS 6D', 'ICS 139W']
-    # schedule['Winter1'] = ['INF 191A']
+    schedule['Winter0'] = ['ICS 6D', 'ICS 139W', 'INF 101', 'INF 113']
+    schedule['Winter1'] = ['CS 161']
 
     for _, v in schedule.items():
         for course in v:
