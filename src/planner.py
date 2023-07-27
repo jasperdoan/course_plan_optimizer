@@ -6,6 +6,7 @@ from dataclasses import dataclass
 class CoursePlanner:
     data_path: str
     planned_years: int
+    max_courses_per_sem: int
     completed_courses: list = None
     _cdict: dict = None
     _pdag: dict = None
@@ -84,9 +85,10 @@ class CoursePlanner:
                 if prereq not in self._visited:
                     self.__build_plan_dfs(prereq, courses_avail)
         else:
-            for i in [0, 1]:
+            for i in range(self.planned_years):
                 for session in courses_avail[course]:
-                    if len(self._schedule[f'{session}{i}']) < 4:
+                    window = len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem
+                    if window:
                         self._schedule[f'{session}{i}'].append(course)
                         return
 
@@ -97,16 +99,18 @@ class CoursePlanner:
                 if prereq in v:
                     min_score_window = max(min_score_window, self._session_val[k])
         # Check forwards dag
-        max_score_window = 6
+        max_score_window = self.planned_years * 3
         for next_course in self._fdag[course]:
             for k, v in self._schedule.items():
                 if next_course in v:
                     max_score_window = min(max_score_window, self._session_val[k])
         
-        for i in [0, 1]:
+        for i in range(self.planned_years):
             for session in courses_avail[course]:
-                window = self._session_val[f'{session}{i}'] > min_score_window and self._session_val[f'{session}{i}'] < max_score_window
-                if len(self._schedule[f'{session}{i}']) < 4 and window:
+                window = len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem \
+                    and self._session_val[f'{session}{i}'] > min_score_window \
+                    and self._session_val[f'{session}{i}'] < max_score_window
+                if window:
                     self._schedule[f'{session}{i}'].append(course)
                     return
     

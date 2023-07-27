@@ -10,6 +10,7 @@ def main():
     p = CoursePlanner(
         data_path='data\courses.csv',
         planned_years=2,
+        max_courses_per_sem=4,
         completed_courses=transferred_courses
     )
 
