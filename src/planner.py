@@ -1,5 +1,6 @@
 import pandas as pd
 from dataclasses import dataclass
+from typing import Callable
 
 
 @dataclass
@@ -76,41 +77,37 @@ class CoursePlanner:
     
 
     def __build_plan_dfs(self, course: str, courses_avail: dict) -> None:
+        # Base case
         if course in self._visited:
             return
         self._visited.add(course)
 
+        # Find further node (core course / course with no prereq)
         if self._pdag[course]:
             for prereq in self._pdag[course]:
                 if prereq not in self._visited:
                     self.__build_plan_dfs(prereq, courses_avail)
-        else:
-            for i in range(self.planned_years):
-                for session in courses_avail[course]:
-                    window = len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem
-                    if window:
-                        self._schedule[f'{session}{i}'].append(course)
-                        return
 
-        # If the course has prerequisites
-        min_score_window = -1
-        for prereq in self._pdag[course]:
-            for k, v in self._schedule.items():
-                if prereq in v:
-                    min_score_window = max(min_score_window, self._session_val[k])
-        # Check forwards dag
-        max_score_window = self.planned_years * 3
-        for next_course in self._fdag[course]:
-            for k, v in self._schedule.items():
-                if next_course in v:
-                    max_score_window = min(max_score_window, self._session_val[k])
+        # Lambda functions
+        def check_max_len(session: str, i: int) -> bool:
+            return len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem
         
+        def get_score(base: int, dag: dict, min_max: Callable[[int, int], int]) -> int:
+            score = base
+            for n in dag[course]:
+                for k, v in self._schedule.items():
+                    if n in v:
+                        score = min_max(score, self._session_val[k])
+            return score
+
+        # Add course to schedule logic
+        min_score_window = get_score(-1, self._pdag, max)
+        max_score_window = get_score(self.planned_years * 3, self._fdag, min)
+
         for i in range(self.planned_years):
             for session in courses_avail[course]:
-                window = len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem \
-                    and self._session_val[f'{session}{i}'] > min_score_window \
-                    and self._session_val[f'{session}{i}'] < max_score_window
-                if window:
+                score = self._session_val[f'{session}{i}']
+                if check_max_len(session, i) and min_score_window < score < max_score_window:
                     self._schedule[f'{session}{i}'].append(course)
                     return
     
