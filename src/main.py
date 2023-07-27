@@ -60,10 +60,12 @@ def main():
     visited = set()
 
 
-    # for k, v in courses_avail.items():
-    #     print(f'{k}: {v}')
+    # Completed courses
+    completed = ['ICS 6N', 'ICS 31', 'ICS 32', 'ICS 33', 'ICS 45C', 'ICS 45J', 'ICS 46', 'ICS 51']
 
-
+    for course in completed:
+        visited.add(course)
+        
     # Hard picked core classes
     schedule['Fall0'] = ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67']
     schedule['Winter0'] = ['ICS 6D', 'ICS 139W', 'INF 101', 'INF 113']
