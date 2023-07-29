@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 import streamlit as st
 from collections import deque
 
@@ -22,7 +21,7 @@ def topological_sort(dag: dict) -> dict:
     return topo_order
 
 
-def graph_relationship(pdag: dict) -> None:
+def create_dag(pdag: dict) -> tuple:
     dag = topological_sort(pdag)
 
     G = nx.Graph()
@@ -34,21 +33,10 @@ def graph_relationship(pdag: dict) -> None:
 
     # Set node spacing options
     layout_options = {'k': .5, 'iterations': 50}
-
-    # Draw the graph with customizations
     pos = nx.spring_layout(G, **layout_options)
-    nx.draw(G, pos, 
-        with_labels=True, 
-        font_size=7.5, 
-        arrows=True, 
-        arrowstyle='->', 
-        arrowsize=15, 
-        node_color=[
-            'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
-        node_size=1000
-    )
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.pyplot()
+    
+    return G, pos
+    
 
 
 def dag_leveler(dag) -> list:

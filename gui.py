@@ -10,7 +10,7 @@ COURSE_DATA_PATH = 'data\courses.csv'
 AVAILABILITY_DATA_PATH = 'data\course_avail.csv'
 
 st.set_page_config(
-    page_title='UCI Course Planner',
+    page_title='UCI Course Optimizer',
     page_icon='📚',
     layout='wide',
     initial_sidebar_state='auto'
@@ -35,6 +35,23 @@ def load_courses(path: str) -> dict:
 @st.cache_data
 def load_availability(path: str) -> dict:
     return scape_read_csv(path)
+
+
+@st.cache_resource
+def plot_dag(pdag: dict) -> None:
+    G, pos = create_dag(pdag)
+    nx.draw(G, pos, 
+        with_labels=True, 
+        font_size=7.5, 
+        arrows=True, 
+        arrowstyle='->', 
+        arrowsize=15, 
+        node_color=[
+            'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
+        node_size=1000
+    )
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.pyplot()
 
 
 with st.sidebar:
@@ -71,22 +88,31 @@ with st.sidebar:
 
 
 with tab1:
-    st.title('UCI Course Plan Optimizer')
-    st.write('This is a course planner for UCI students. It is designed to help students plan out their courses for the next few years.')
-    st.write('This app will create the optimal academic year plan for students. This tool uses Bayesian networks, DFS, Topological sorting to build DAGs that prevent class conflicts, considering prerequisites, corequisites, units & course likeness. Streamline your course planning with ease. GitHub repo for efficient scheduling.')
-    st.image('https://media.tenor.com/CYE3MnKr2nQAAAAd/dog-huh.gif')
+    tab1_col1, tab1_col2 = st.columns([1, .3])
+    tab1_col1.title('UCI Course Plan Optimizer')
+    tab1_col1.write('This is a course planner for UCI students. It is designed to help students plan out their courses for the next few years.')
+    tab1_col1.write('This app will create the optimal academic year plan for students. This tool uses Bayesian networks, DFS, Topological sorting to build DAGs that prevent class conflicts, considering prerequisites, corequisites, units & course likeness. Streamline your course planning with ease. GitHub repo for efficient scheduling.')
+    tab1_col2.image('https://media.tenor.com/CYE3MnKr2nQAAAAd/dog-huh.gif')
     
-    # st.subheader('Direct Acyclic Graphs')
-    # st.write('The following is the prerequisite DAG for the major courses')
-    # graph_relationship(
-    #     {k: v[1] for k, v in load_courses(COURSE_DATA_PATH).items()},
-    # )
-
+    st.subheader('Direct Acyclic Graphs')
+    st.write('The following is the prerequisite DAG for your major courses based on your sidebar inputs.')
+    try:
+        pdag = st.session_state['student_plan'].prereq_dag.copy()
+        for course in st.session_state['student_plan'].completed_courses:
+            pdag.pop(course)
+            for k, v in pdag.items():
+                if course in v:
+                    pdag[k].remove(course)
+        plot_dag(pdag)
+    except :
+        st.warning('Slow down - Add one course at a time', icon="⚠️")
+    
 
 with tab2:
+    tab3_col1, tab3_col2 = st.columns([1, .6])
+
     availability_list = load_availability(AVAILABILITY_DATA_PATH)
     courses_avail = {k: availability_list[k] for k, _ in st.session_state['student_plan'].course_dict.items()}
-    courses_avail = {k: v for k, v in sorted(courses_avail.items(), key=lambda item: len(item[1]))}
 
     session = {
         f'{s}{i}': [] 
@@ -94,19 +120,22 @@ with tab2:
             for s in ['Fall', 'Winter', 'Spring'] 
     }
 
-    st.subheader('Add fixed Core Courses')
+    tab3_col2.header('Add Fixed Core Courses')
+    tab3_col2.write('If there\'s a course you want to take in a specific quarter, add it here.')
+    tab3_col2.info('Note: These are TENTATIVE course listings schedule. Department Chairs may provide updated information regarding course offerings or faculty assignments throughout the year.', icon="ℹ️")
     for i in range(st.session_state['planned_years']):
         for season in ['Fall', 'Winter', 'Spring']:
-            # Multiselect for each season
-            st.write(f'**{season} {i}**')
-            session[f'{season}{i}'] = st.multiselect(
-                'Select the courses you want to take this season',
+            session[f'{season}{i}'] = tab3_col2.multiselect(
+                f'**{season} {i}**',
                 [k for k, v in courses_avail.items() if season in v],
                 key=f'{season}{i}'
             )
 
-
-    if st.button('Generate Plan'):
+    courses_avail = {k: v for k, v in sorted(courses_avail.items(), key=lambda item: len(item[1]))}
+    
+    if tab3_col2.button('Generate Plan'):
+        tab3_col2.success('Successfully generated a plan!', icon="✅")
+        st.balloons()
         for i in range(st.session_state['planned_years']):
             for season in ['Fall', 'Winter', 'Spring']:
                 if f'{season}{i}' in st.session_state:
@@ -116,6 +145,10 @@ with tab2:
                     )
 
         st.session_state['student_plan'].build_plan(courses_avail) 
-        st.subheader('Potential Plan')
         schedule = st.session_state['student_plan'].schedule
-        st.table(schedule)
+        tab3_col1.header('Potential Plan(s)')
+        tab3_col1.table(schedule)
+        
+
+with tab3:
+    st.snow()
