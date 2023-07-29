@@ -1,5 +1,5 @@
 from planner import CoursePlanner
-from scraper import read_csv
+from scraper import scape_read_csv
 from utils import *
             
 
@@ -13,16 +13,16 @@ def main():
         completed_courses=transferred_courses
     )
 
-    availability_list = read_csv('data\course_avail.csv')
+    availability_list = scape_read_csv('data\course_avail.csv')
 
     courses_avail = {k: availability_list[k] for k, _ in p.course_dict.items()}
     courses_avail = {k: v for k, v in sorted(courses_avail.items(), key=lambda item: len(item[1]))}
     
 
     # Hard picked core classes
-    p.fixed_core_course('Fall', 0, ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67'])
-    p.fixed_core_course('Winter', 0, ['ICS 6D', 'ICS 139W', 'INF 101', 'INF 113'])
-    p.fixed_core_course('Winter', 1, ['CS 161'])
+    p.fixed_core_course('Fall0', ['ICS 6B', 'CS 122A', 'INF 43', 'STATS 67'])
+    p.fixed_core_course('Winter0', ['ICS 6D', 'ICS 139W', 'INF 101', 'INF 113'])
+    p.fixed_core_course('Winter1', ['CS 161'])
 
     p.build_plan(courses_avail)
 

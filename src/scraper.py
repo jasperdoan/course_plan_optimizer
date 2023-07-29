@@ -52,7 +52,7 @@ def scrape_avail_listings(year: int, department: str, level: str = 'ALL', progra
     return course_availability
 
 
-def save_csv(file_path: str, data: dict) -> None:
+def scape_save_csv(file_path: str, data: dict) -> None:
     for k, v in data.items():
         data[k] = '+'.join(v)
 
@@ -60,7 +60,7 @@ def save_csv(file_path: str, data: dict) -> None:
     df.to_csv(file_path, index=False)
 
 
-def read_csv(file_path: str) -> dict:
+def scape_read_csv(file_path: str) -> dict:
     df = pd.read_csv(file_path)
     course_dict = {}
 

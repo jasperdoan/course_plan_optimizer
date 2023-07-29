@@ -52,7 +52,6 @@ class CoursePlanner:
     def __read_csv_to_dict(self) -> dict:
         df = pd.read_csv(self.data_path)
         course_dict = {}
-
         for _, row in df.iterrows():
             course_id = row['CoursesID']
             title = row['Title']
@@ -60,7 +59,6 @@ class CoursePlanner:
             units = row['Units']
             prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
             course_dict[course_id] = (title, prereq_list, units)
-
         return course_dict
 
 
@@ -116,11 +114,11 @@ class CoursePlanner:
                     return
     
     
-    def fixed_core_course(self, semester: str, year: int, courses: list) -> None:
-        self._schedule[f'{semester}{year}'] = courses
+    def fixed_core_course(self, semester: str, courses: list) -> None:
+        self._schedule[f'{semester}'] = courses
         for course in courses:
             self._visited.add(course)
-    
+
 
     def build_plan(self, courses_avail: dict) -> None:
         for x, _ in courses_avail.items():
