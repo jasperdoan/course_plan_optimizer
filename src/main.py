@@ -34,24 +34,12 @@ if __name__ == '__main__':
 
 
 # TODO:
-# [ ] DFS within DFS --> Check for prereq while building schedule
-#       Rn its just filling in earliest available slot without prereq check
-# [ ] Construct all a possible (DFS) based on availability
-# [ ] Display all possible schedules
+# [ ] Display multiple possible schedules
 
 # [ ] Webscape prerequisites instead of manually adding them in csv file
 #       https://www.reg.uci.edu/cob/prrqcgi?term=202392&dept=IN4MATX&action=view_by_term#43
 #       https://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/softwareengineering_bs/#requirementstext
 
-# [ ] CLI
+# [ ] Refine GUI
 
-
-
-
-# for item in dlvl:
-#     for k, i in item.items():
-#         print('    '*i + f'{i}: {k}: {availability_list[k]}' )
-#     print('-'*50)
-
-# for k, v in availability_list.items():
-#     print(f'{k}: {v}')
+# [ ] Change implementation to MAX UNITS instead of MAX COURSES per semester
