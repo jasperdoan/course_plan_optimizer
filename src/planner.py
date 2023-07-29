@@ -27,6 +27,10 @@ class CoursePlanner:
     @property
     def forward_dag(self) -> dict:
         return self._fdag
+    
+    @property
+    def schedule(self) -> dict:
+        return self._schedule
 
     def __post_init__(self):
         self._cdict = self.__read_csv_to_dict()

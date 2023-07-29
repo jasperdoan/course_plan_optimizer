@@ -1,4 +1,3 @@
-
 from planner import CoursePlanner
 from scraper import read_csv
 from utils import *

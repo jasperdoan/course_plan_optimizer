@@ -1,20 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import streamlit as st
 from collections import deque
-
-
-def display_info(course_dict: dict, avail_dict: dict) -> None:
-    print('All Courses:\n', '-'*100)
-    for course, (title, preq, units) in course_dict.items():
-        print(f'{course}: {title} ({units} units)')
-        print(f'\tPrerequisites: {preq}')
-        print(f'\tAvailability: {avail_dict[course] if course in avail_dict else []}')
-        print('-'*75)
-
-
-def display_dag(dag: dict) -> None:
-    for k, v in dag.items():
-        print(f'{k}: {v}')
 
 
 def topological_sort(dag: dict) -> dict:
@@ -60,7 +47,8 @@ def graph_relationship(pdag: dict) -> None:
             'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
         node_size=1000
     )
-    plt.show()
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.pyplot()
 
 
 def dag_leveler(dag) -> list:
