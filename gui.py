@@ -1,8 +1,5 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import pandas as pd
 from src.planner import CoursePlanner
-from src.scraper import scape_read_csv
 from src.utils import *
 
 
@@ -16,42 +13,6 @@ st.set_page_config(
     initial_sidebar_state='auto'
 )
 tab1, tab2, tab3 = st.tabs(['Home', 'Course Planner', 'About'])
-
-
-@st.cache_data
-def load_courses(path: str) -> dict:
-    df = pd.read_csv(path)
-    course_dict = {}
-    for _, row in df.iterrows():
-        course_id = row['CoursesID']
-        title = row['Title']
-        prereq = row['Prerequisites']
-        units = row['Units']
-        prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
-        course_dict[course_id] = (title, prereq_list, units)
-    return course_dict
-
-
-@st.cache_data
-def load_availability(path: str) -> dict:
-    return scape_read_csv(path)
-
-
-@st.cache_resource
-def plot_dag(pdag: dict) -> None:
-    G, pos = create_dag(pdag)
-    nx.draw(G, pos, 
-        with_labels=True, 
-        font_size=7.5, 
-        arrows=True, 
-        arrowstyle='->', 
-        arrowsize=15, 
-        node_color=[
-            'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
-        node_size=1000
-    )
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.pyplot()
 
 
 with st.sidebar:
@@ -94,7 +55,7 @@ with tab1:
     tab1_col1.write('This app will create the optimal academic year plan for students. This tool uses Bayesian networks, DFS, Topological sorting to build DAGs that prevent class conflicts, considering prerequisites, corequisites, units & course likeness. Streamline your course planning with ease. GitHub repo for efficient scheduling.')
     tab1_col2.image('https://media.tenor.com/CYE3MnKr2nQAAAAd/dog-huh.gif')
     
-    st.subheader('Direct Acyclic Graphs')
+    st.subheader('Major Pathway: Direct Acyclic Graphs for Major')
     st.write('The following is the prerequisite DAG for your major courses based on your sidebar inputs.')
     try:
         pdag = st.session_state['student_plan'].prereq_dag.copy()
@@ -152,3 +113,4 @@ with tab2:
 
 with tab3:
     st.snow()
+    st.title('Your mom')

@@ -1,8 +1,30 @@
 import networkx as nx
 import streamlit as st
+import pandas as pd
 from collections import deque
+from src.scraper import scape_read_csv
 
 
+@st.cache_data
+def load_courses(path: str) -> dict:
+    df = pd.read_csv(path)
+    course_dict = {}
+    for _, row in df.iterrows():
+        course_id = row['CoursesID']
+        title = row['Title']
+        prereq = row['Prerequisites']
+        units = row['Units']
+        prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
+        course_dict[course_id] = (title, prereq_list, units)
+    return course_dict
+
+
+@st.cache_data
+def load_availability(path: str) -> dict:
+    return scape_read_csv(path)
+
+
+@st.cache_data
 def topological_sort(dag: dict) -> dict:
     def dfs(course: str) -> None:
         visited.add(course)
@@ -21,7 +43,8 @@ def topological_sort(dag: dict) -> dict:
     return topo_order
 
 
-def create_dag(pdag: dict) -> tuple:
+@st.cache_resource
+def plot_dag(pdag: dict) -> tuple:
     dag = topological_sort(pdag)
 
     G = nx.Graph()
@@ -34,9 +57,19 @@ def create_dag(pdag: dict) -> tuple:
     # Set node spacing options
     layout_options = {'k': .5, 'iterations': 50}
     pos = nx.spring_layout(G, **layout_options)
-    
-    return G, pos
-    
+
+    nx.draw(G, pos, 
+        with_labels=True, 
+        font_size=7.5, 
+        arrows=True, 
+        arrowstyle='->', 
+        arrowsize=15, 
+        node_color=[
+            'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
+        node_size=1000
+    )
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.pyplot()
 
 
 def dag_leveler(dag) -> list:
