@@ -13,12 +13,8 @@ ICS 139W,Critical Writing on Information Technology,,4
 STATS 67,Introduction to Probability and Statistics for Computer Science,,4
 CS 122A,Introduction to Data Management,ICS 33,4
 CS 132,Computer Networks,STATS 67,4
-CS 142A,Compilers and Interpreters,INF 101,4
 CS 143A,Principles of Operating Systems,ICS 46+ICS 51,4
-CS 145,Embedded Software,ICS 51+ICS 46,6
-CS 146,Programming in Multitasking Operating Systems,ICS 51+ICS 46,4
 CS 161,Design and Analysis of Algorithms,ICS 6B+ICS 6D+ICS 46,4
-CS 165,Project in Algorithms and Data Structures,CS 161,4
 INF 43,Introduction to Software Engineering,ICS 32,4
 INF 101,Concepts in Programming Languages I,ICS 51+ICS 46,4
 INF 113,Requirements Analysis and Engineering,INF 43+ICS 33,4

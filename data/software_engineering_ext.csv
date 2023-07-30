@@ -1,0 +1,17 @@
+CoursesID,Title,Prerequisites,Units
+INF 102,Concepts of Programming Language II,INF 101,4
+INF 125,Computer Game Development,INF 121,4
+INF 132,Project in Human-Computer Interaction Requirements and Evaluation,INF 131,4
+INF 133,User Interaction Software,ICS 45C,4
+INF 134,Project in User Interaction Software,INF 131+INF 133,4
+INF 141,Information Retrieval,ICS 45C+STATS 67,4
+INF 143,Information Visualization,INF 43+ICS 31,4
+INF 148,Project in Ubiquitous Computing,ICS 31,4
+INF 161,Social Analysis of Computing,ICS 31,4
+CS 133,Advanced Computer Networks,CS 132,4
+CS 134,Computer and Network Security,CS 132+CS 161,4
+CS 142A,Compilers and Interpreters,INF 101,4
+CS 142B,Language Processor Construction,CS 142A,4
+CS 145,Embedded Software,ICS 51+ICS 46,6
+CS 146,Programming in Multitasking Operating Systems,ICS 51+ICS 46,4
+CS 165,Project in Algorithms and Data Structures,CS 161,4

@@ -44,7 +44,7 @@ def topological_sort(dag: dict) -> dict:
 
 
 @st.cache_resource
-def plot_dag(pdag: dict) -> tuple:
+def plot_dag(pdag: dict):
     dag = topological_sort(pdag)
 
     G = nx.Graph()
@@ -60,13 +60,13 @@ def plot_dag(pdag: dict) -> tuple:
 
     nx.draw(G, pos, 
         with_labels=True, 
-        font_size=7.5, 
+        font_size=5.5, 
         arrows=True, 
         arrowstyle='->', 
-        arrowsize=15, 
+        arrowsize=12, 
         node_color=[
             'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
-        node_size=1000
+        node_size=750
     )
     st.set_option('deprecation.showPyplotGlobalUse', False)
     st.pyplot()
