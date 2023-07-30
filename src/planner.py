@@ -7,7 +7,7 @@ from typing import Callable
 class CoursePlanner:
     data_path: str
     planned_years: int
-    max_courses_per_sem: int
+    max_units_per_sem: int
     completed_courses: list = None
     _cdict: dict = None
     _pdag: dict = None
@@ -91,8 +91,9 @@ class CoursePlanner:
                     self.__build_plan_dfs(prereq, courses_avail)
 
         # Lambda functions
-        def check_max_len(session: str, i: int) -> bool:
-            return len(self._schedule[f'{session}{i}']) < self.max_courses_per_sem
+        def check_max_units(session: str, i: int) -> bool:
+            total_units = sum([self._cdict[c][2] for c in self._schedule[f'{session}{i}']])
+            return total_units < self.max_units_per_sem
         
         def get_score(base: int, dag: dict, min_max: Callable[[int, int], int]) -> int:
             score = base
@@ -109,7 +110,7 @@ class CoursePlanner:
         for i in range(self.planned_years):
             for session in courses_avail[course]:
                 score = self._session_val[f'{session}{i}']
-                if check_max_len(session, i) and min_score_window < score < max_score_window:
+                if check_max_units(session, i) and min_score_window < score < max_score_window:
                     self._schedule[f'{session}{i}'].append(course)
                     return
     

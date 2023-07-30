@@ -3,6 +3,7 @@ from src.planner import CoursePlanner
 from src.utils import *
 
 
+
 COURSE_DATA_PATH = 'data\software_engineering.csv'
 COURSE_EXT_DATA_PATH = 'data\software_engineering_ext.csv'
 AVAILABILITY_PATH = 'data\courses_availability.csv'
@@ -71,7 +72,7 @@ with st.sidebar:
     st.session_state['student_plan'] = CoursePlanner(
         data_path=TEMP_PATH,
         planned_years=st.session_state['planned_years'],
-        max_courses_per_sem=4,
+        max_units_per_sem=max_units,
         completed_courses=completed_courses,
     )
     
