@@ -51,33 +51,29 @@ class CoursePlanner:
 
     def __read_csv_to_dict(self) -> dict:
         df = pd.read_csv(self.data_path)
-        course_dict = {}
-        for _, row in df.iterrows():
-            course_id = row['CoursesID']
-            title = row['Title']
-            prereq = row['Prerequisites']
-            units = row['Units']
-            prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
-            course_dict[course_id] = (title, prereq_list, units)
-        return course_dict
+        return {
+            row['CoursesID']: 
+                (row['Title'], 
+                 [] if pd.isnull(row['Prerequisites']) else row['Prerequisites'].split('+'), 
+                 row['Units']) 
+            for _, row in df.iterrows()
+        }
 
 
     def __build_pdag(self, course_dict: dict) -> dict:
-        return {k: l for k, (_, l, _) in course_dict.items()}
+        return {k: v[1] for k, v in course_dict.items()}
 
 
     def __build_fdag(self, course_dict: dict) -> dict:
-        dag = {}
-        
+        dag = {} 
         for cid, (_, prereqs, _) in course_dict.items():
             dag.setdefault(cid, [])
             for p in prereqs:
                 dag.setdefault(p, [])
                 dag[p].append(cid)
-
         return dag
     
-
+    
     def __build_plan_dfs(self, course: str, courses_avail: dict) -> None:
         # Base case
         if course in self._visited:
@@ -122,8 +118,8 @@ class CoursePlanner:
 
 
     def build_plan(self, courses_avail: dict) -> None:
-        for x, _ in courses_avail.items():
-            self.__build_plan_dfs(x, courses_avail)
+        for k in courses_avail.keys():
+            self.__build_plan_dfs(k, courses_avail)
                 
                 
     def display_schedule(self) -> None:

@@ -2,6 +2,7 @@ import networkx as nx
 import streamlit as st
 import pandas as pd
 from collections import deque
+from functools import lru_cache
 from src.scraper import scape_read_csv
 
 
@@ -26,6 +27,7 @@ def load_availability(path: str) -> dict:
 
 @st.cache_data
 def topological_sort(dag: dict) -> dict:
+    @lru_cache(maxsize=None)
     def dfs(course: str) -> None:
         visited.add(course)
         for prereq in dag[course]:
@@ -65,7 +67,10 @@ def plot_dag(pdag: dict):
         arrowstyle='->', 
         arrowsize=12, 
         node_color=[
-            'lightblue' if node[:2] == 'CS' else 'lightgreen' if node[:3] == 'INF' else 'lightcoral' for node in G.nodes()],
+            'lightblue' if node[:2] == 'CS' else 
+            'lightgreen' if node[:3] == 'INF' else 
+            'lightcoral' for node in G.nodes()
+        ],
         node_size=750
     )
     st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -90,7 +95,6 @@ def dag_leveler(dag) -> list:
                     q.append((n, i + 1))
                     visited.add(n)
                     levels[n] = i + 1
-                    
         return levels
     
     mult_dag = []

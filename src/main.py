@@ -7,7 +7,7 @@ def main():
     transferred_courses = ['ICS 6N', 'ICS 31', 'ICS 32', 'ICS 33', 'ICS 45C', 'ICS 45J', 'ICS 46', 'ICS 51']
 
     p = CoursePlanner(
-        data_path='data\software_engineering.csv',
+        data_path='data\\temp.csv',
         planned_years=2,
         max_units_per_sem=16,
         completed_courses=transferred_courses
