@@ -1,6 +1,7 @@
 import streamlit as st
+import pandas as pd
 from src.planner import CoursePlanner
-from src.utils import *
+from src.utils import load_courses, load_availability, update_plot_dag
 
 
 
@@ -8,6 +9,8 @@ COURSE_DATA_PATH = 'data\software_engineering.csv'
 COURSE_EXT_DATA_PATH = 'data\software_engineering_ext.csv'
 AVAILABILITY_PATH = 'data\courses_availability.csv'
 STUDENT_PICK = 'data\\student_pick.csv'
+QUARTERS = ['Fall', 'Winter', 'Spring']
+
 
 st.set_page_config(
     page_title='UCI Course Optimizer',
@@ -16,8 +19,6 @@ st.set_page_config(
     initial_sidebar_state='auto'
 )
 tab1, tab2, tab3 = st.tabs(['Home', 'Course Planner', 'About'])
-
-
 
 
 
@@ -48,15 +49,14 @@ with st.sidebar:
     st.subheader('Electives Courses')
     elective_selected = st.sidebar.multiselect(
         'Select the elective courses you are interested in taking',
-        [k for k, (_, _, _) in load_courses(COURSE_EXT_DATA_PATH).items()],
+        [k for k in load_courses(COURSE_EXT_DATA_PATH).keys()],
     )
 
     st.subheader('Completed Courses')
     completed_courses = st.sidebar.multiselect(
         'Select the courses you have already completed/are going to transfer over',
-        [k for k, (_, _, _) in {**load_courses(COURSE_DATA_PATH), **load_courses(COURSE_EXT_DATA_PATH)}.items()],
+        [k for k in {**load_courses(COURSE_DATA_PATH), **load_courses(COURSE_EXT_DATA_PATH)}.keys()],
     )
-
 
 
     # For every course picked in elective_selected, create a temp.csv file with the core courses + the selected elective course
@@ -68,83 +68,74 @@ with st.sidebar:
     all_courses.to_csv(STUDENT_PICK, index=False)
 
 
-
     st.session_state['student_plan'] = CoursePlanner(
         data_path=STUDENT_PICK,
         planned_years=st.session_state['planned_years'],
         max_units_per_sem=max_units,
         completed_courses=completed_courses,
+        sessions=QUARTERS
     )
     
 
 
 with tab1:
-    tab1_col1, tab1_col2 = st.columns([1, .3])
-    tab1_col1.title('UCI Course Plan Optimizer')
-    tab1_col1.write('This is a course planner for UCI students. It is designed to help students plan out their courses for the next few years.')
-    tab1_col1.write('This app will create the optimal academic year plan for students. This tool uses Bayesian networks, DFS, Topological sorting to build DAGs that prevent class conflicts, considering prerequisites, corequisites, units & course likeness. Streamline your course planning with ease. GitHub repo for efficient scheduling.')
-    tab1_col2.image('https://media.tenor.com/CYE3MnKr2nQAAAAd/dog-huh.gif')
+    t1_lcol, t1_rcol = st.columns([1, .3])
+    t1_lcol.title('UCI Course Plan Optimizer')
+    t1_lcol.write('This is a course planner for UCI students. It is designed to help students plan out their courses for the next few years.')
+    t1_lcol.write('This app will create the optimal academic year plan for students. This tool uses Bayesian networks, DFS, Topological sorting to build DAGs that prevent class conflicts, considering prerequisites, corequisites, units & course likeness. Streamline your course planning with ease. GitHub repo for efficient scheduling.')
+    t1_rcol.image('https://media.tenor.com/CYE3MnKr2nQAAAAd/dog-huh.gif')
     
     st.subheader('Major Pathway: Direct Acyclic Graphs for Major')
     st.write('The following is the prerequisite DAG for your major courses based on your sidebar inputs.')
-    try:
-        pdag = st.session_state['student_plan'].prereq_dag.copy()
-        for course in st.session_state['student_plan'].completed_courses:
-            pdag.pop(course)
-            for k, v in pdag.items():
-                if course in v:
-                    pdag[k].remove(course)
-        plot_dag(pdag)
-    except:
-        st.warning('Slow down - Add one course at a time', icon="⚠️")
+    
+    update_plot_dag(st.session_state['student_plan'])
     
 
 with tab2:
-    tab2_col1, tab2_col2 = st.columns([1, .6])
-    tab2_col2.header('Add Fixed Core Courses')
-    tab2_col2.write('If there\'s a course you want to take in a specific quarter, add it here.')
-    tab2_col2.info('Note: These are TENTATIVE course listings schedule. Department Chairs may provide updated information regarding course offerings or faculty assignments throughout the year.', icon="ℹ️")
+    t2_lcol, t2_rcol = st.columns([1, .6])
+    t2_rcol.header('Add Fixed Core Courses')
+    t2_rcol.write('If there\'s a course you want to take in a specific quarter, add it here.')
+    t2_rcol.info('Note: These are TENTATIVE course listings schedule. Department Chairs may provide updated information regarding course offerings or faculty assignments throughout the year.', icon="ℹ️")
     
     availability_list = load_availability(AVAILABILITY_PATH)
 
     courses_avail = {}
-    for k, _ in st.session_state['student_plan'].course_dict.items():
+    for k in st.session_state['student_plan'].course_dict.keys():
         if k in availability_list:
             courses_avail[k] = availability_list[k]
         else:
-            tab2_col2.warning(f'Looks like {k} is not offered this school year, pick another elective', icon="⚠️")
+            t2_rcol.warning(f'Looks like {k} is not offered this school year, pick another elective', icon="⚠️")
 
     session = {
         f'{s}{i}': [] 
             for i in range(st.session_state['planned_years'])
-            for s in ['Fall', 'Winter', 'Spring'] 
+            for s in QUARTERS 
     }
 
     for i in range(st.session_state['planned_years']):
-        for season in ['Fall', 'Winter', 'Spring']:
-            session[f'{season}{i}'] = tab2_col2.multiselect(
-                f'**{season} {i}**',
+        for season in QUARTERS:
+            k = f'{season}{i}'
+            session[k] = t2_rcol.multiselect(
+                f'**{k}**',
                 [k for k, v in courses_avail.items() if season in v],
-                key=f'{season}{i}'
+                key=k
             )
 
     courses_avail = {k: v for k, v in sorted(courses_avail.items(), key=lambda item: len(item[1]))}
     
-    if tab2_col2.button('Generate Plan'):
-        tab2_col2.success('Successfully generated a plan!', icon="✅")
+    if t2_rcol.button('Generate Plan'):
+        t2_rcol.success('Successfully generated a plan!', icon="✅")
         st.balloons()
         for i in range(st.session_state['planned_years']):
-            for season in ['Fall', 'Winter', 'Spring']:
-                if f'{season}{i}' in st.session_state:
-                    st.session_state['student_plan'].fixed_core_course(
-                        f'{season}{i}',
-                        session[f'{season}{i}']
-                    )
+            for season in QUARTERS:
+                k = f'{season}{i}'
+                if k in st.session_state:
+                    st.session_state['student_plan'].fixed_core_course(k, session[k])
 
         st.session_state['student_plan'].build_plan(courses_avail) 
         schedule = st.session_state['student_plan'].schedule
-        tab2_col1.header('Potential Plan(s)')
-        tab2_col1.table(schedule)
+        t2_lcol.header('Potential Plan(s)')
+        t2_lcol.table(schedule)
         
 
 with tab3:

@@ -9,6 +9,7 @@ class CoursePlanner:
     planned_years: int
     max_units_per_sem: int
     completed_courses: list = None
+    sessions: list = None
     _cdict: dict = None
     _pdag: dict = None
     _fdag: dict = None
@@ -39,7 +40,7 @@ class CoursePlanner:
         self._session_val = {
             f'{s}{i}': i*3 + idx 
                 for i in range(self.planned_years)
-                for idx, s in enumerate(['Fall', 'Winter', 'Spring']) 
+                for idx, s in enumerate(self.sessions) 
         }
         self._schedule = {k: [] for k in self._session_val.keys()}
 
@@ -87,27 +88,28 @@ class CoursePlanner:
                     self.__build_plan_dfs(prereq, courses_avail)
 
         # Lambda functions
-        def check_max_units(session: str, i: int) -> bool:
-            total_units = sum([self._cdict[c][2] for c in self._schedule[f'{session}{i}']])
+        def check_max_units(k: str) -> bool:
+            total_units = sum([self._cdict[c][2] for c in self._schedule[k]])
             return total_units + self._cdict[course][2] <= self.max_units_per_sem
         
-        def get_score(base: int, dag: dict, min_max: Callable[[int, int], int]) -> int:
+        def get_score(base: int, dag: dict, extrema: Callable[[int, int], int]) -> int:
             score = base
             for n in dag[course]:
                 for k, v in self._schedule.items():
                     if n in v:
-                        score = min_max(score, self._session_val[k])
+                        score = extrema(score, self._session_val[k])
             return score
 
         # Add course to schedule logic
-        min_score_window = get_score(-1, self._pdag, max)
-        max_score_window = get_score(self.planned_years * 3, self._fdag, min)
+        min_window = get_score(-1, self._pdag, max)
+        max_window = get_score(self.planned_years * 3, self._fdag, min)
 
         for i in range(self.planned_years):
             for session in courses_avail[course]:
-                score = self._session_val[f'{session}{i}']
-                if check_max_units(session, i) and min_score_window < score < max_score_window:
-                    self._schedule[f'{session}{i}'].append(course)
+                k = f'{session}{i}'
+                score = self._session_val[k]
+                if check_max_units(k) and min_window < score < max_window:
+                    self._schedule[k].append(course)
                     return
     
     

@@ -4,13 +4,15 @@ from utils import *
             
 
 def main():
+    QUARTERS = ['Fall', 'Winter', 'Spring']
     transferred_courses = ['ICS 6N', 'ICS 31', 'ICS 32', 'ICS 33', 'ICS 45C', 'ICS 45J', 'ICS 46', 'ICS 51']
 
     p = CoursePlanner(
         data_path='data\\temp.csv',
         planned_years=2,
         max_units_per_sem=16,
-        completed_courses=transferred_courses
+        completed_courses=transferred_courses,
+        sessions=QUARTERS
     )
 
     availability_list = scape_read_csv('data\courses_availability.csv')
@@ -35,6 +37,9 @@ if __name__ == '__main__':
 
 # TODO:
 # [ ] Display multiple possible schedules
+
+# [ ] Add Summer session (if they want to take Summer classes) or Remove Winter (Semester instead of Quarter system)
+# [ ] Option to skip a quarter
 
 # [ ] Webscape prerequisites instead of manually adding them in csv file
 #       https://www.reg.uci.edu/cob/prrqcgi?term=202392&dept=IN4MATX&action=view_by_term#43

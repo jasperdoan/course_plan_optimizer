@@ -1,9 +1,11 @@
 import networkx as nx
 import streamlit as st
 import pandas as pd
+from typing import Type
 from collections import deque
 from functools import lru_cache
 from src.scraper import scape_read_csv
+from src.planner import CoursePlanner
 
 
 @st.cache_data
@@ -48,15 +50,12 @@ def topological_sort(dag: dict) -> dict:
 @st.cache_resource
 def plot_dag(pdag: dict):
     dag = topological_sort(pdag)
-
     G = nx.Graph()
-    G.add_nodes_from(dag.keys())
 
+    G.add_nodes_from(dag.keys())
     for n, edges in dag.items():
         for e in edges:
             G.add_edge(n, e)
-
-    # Set node spacing options
     layout_options = {'k': .5, 'iterations': 50}
     pos = nx.spring_layout(G, **layout_options)
 
@@ -75,6 +74,20 @@ def plot_dag(pdag: dict):
     )
     st.set_option('deprecation.showPyplotGlobalUse', False)
     st.pyplot()
+
+
+@st.cache_data
+def update_plot_dag(plan: Type[CoursePlanner]) -> None:
+    try:
+        pdag = plan.prereq_dag.copy()
+        for course in plan.completed_courses:
+            pdag.pop(course)
+            for k, v in pdag.items():
+                if course in v:
+                    pdag[k].remove(course)
+        plot_dag(pdag)
+    except:
+        st.warning('Slow down - Add one course at a time', icon="⚠️")
 
 
 def dag_leveler(dag) -> list:

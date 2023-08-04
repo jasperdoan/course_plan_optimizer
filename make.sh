@@ -1,0 +1,1 @@
+python3 -m streamlit run plan_optimizer.py
