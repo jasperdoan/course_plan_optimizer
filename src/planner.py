@@ -89,7 +89,7 @@ class CoursePlanner:
         # Lambda functions
         def check_max_units(session: str, i: int) -> bool:
             total_units = sum([self._cdict[c][2] for c in self._schedule[f'{session}{i}']])
-            return total_units < self.max_units_per_sem
+            return total_units + self._cdict[course][2] <= self.max_units_per_sem
         
         def get_score(base: int, dag: dict, min_max: Callable[[int, int], int]) -> int:
             score = base
