@@ -80,7 +80,7 @@ def scape_read_csv(file_path: str) -> dict:
 #     **scrape_avail_listings(year=2023, department='STATS')
 # }
 
-# csv_file_path = 'data\course_avail.csv'
+# csv_file_path = 'data\courses_availability.csv'
 
 
 # # Change avail_dict.values() from list to string

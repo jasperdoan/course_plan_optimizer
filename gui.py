@@ -7,7 +7,7 @@ from src.utils import *
 COURSE_DATA_PATH = 'data\software_engineering.csv'
 COURSE_EXT_DATA_PATH = 'data\software_engineering_ext.csv'
 AVAILABILITY_PATH = 'data\courses_availability.csv'
-TEMP_PATH = 'data\\temp.csv'
+STUDENT_PICK = 'data\\student_pick.csv'
 
 st.set_page_config(
     page_title='UCI Course Optimizer',
@@ -65,12 +65,12 @@ with st.sidebar:
     all_courses = pd.concat([core, electives], ignore_index=True).sort_values(by=['CoursesID'])
 
     # Create a temp.csv file with the core courses + the selected elective course
-    all_courses.to_csv(TEMP_PATH, index=False)
+    all_courses.to_csv(STUDENT_PICK, index=False)
 
 
 
     st.session_state['student_plan'] = CoursePlanner(
-        data_path=TEMP_PATH,
+        data_path=STUDENT_PICK,
         planned_years=st.session_state['planned_years'],
         max_units_per_sem=max_units,
         completed_courses=completed_courses,
