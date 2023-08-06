@@ -9,7 +9,7 @@ COURSE_DATA_PATH = 'data\software_engineering.csv'
 COURSE_EXT_DATA_PATH = 'data\software_engineering_ext.csv'
 AVAILABILITY_PATH = 'data\courses_availability.csv'
 STUDENT_PICK = 'data\\student_pick.csv'
-QUARTERS = ['Fall', 'Winter', 'Spring']
+QUARTERS = ['Fall', 'Winter', 'Spring', 'Summer']
 
 
 st.set_page_config(
@@ -43,6 +43,13 @@ with st.sidebar:
     st.sidebar.title('Max Units per Semester')
     max_units = st.sidebar.slider('How many units do you plan to take per semester?', 1, 20, 16)
 
+    st.sidebar.title('Sessions')
+    st.session_state['sessions'] = st.sidebar.multiselect(
+        'Select the sessions you plan to take courses in',
+        QUARTERS,
+        default=QUARTERS[:-1]
+    )
+
     st.sidebar.title(f'Course Information for {major}')
     st.dataframe(all_courses, hide_index=True)
 
@@ -53,7 +60,7 @@ with st.sidebar:
     )
 
     st.subheader('Completed Courses')
-    completed_courses = st.sidebar.multiselect(
+    st.session_state['completed_courses'] = st.sidebar.multiselect(
         'Select the courses you have already completed/are going to transfer over',
         [k for k in {**load_courses(COURSE_DATA_PATH), **load_courses(COURSE_EXT_DATA_PATH)}.keys()],
     )
@@ -72,8 +79,8 @@ with st.sidebar:
         data_path=STUDENT_PICK,
         planned_years=st.session_state['planned_years'],
         max_units_per_sem=max_units,
-        completed_courses=completed_courses,
-        sessions=QUARTERS
+        completed_courses=st.session_state['completed_courses'],
+        sessions=st.session_state['sessions']
     )
     
 
@@ -109,11 +116,11 @@ with tab2:
     session = {
         f'{s}{i}': [] 
             for i in range(st.session_state['planned_years'])
-            for s in QUARTERS 
+            for s in st.session_state['sessions'] 
     }
 
     for i in range(st.session_state['planned_years']):
-        for season in QUARTERS:
+        for season in st.session_state['sessions']:
             k = f'{season}{i}'
             session[k] = t2_rcol.multiselect(
                 f'**{k}**',
@@ -127,7 +134,7 @@ with tab2:
         t2_rcol.success('Successfully generated a plan!', icon="✅")
         st.balloons()
         for i in range(st.session_state['planned_years']):
-            for season in QUARTERS:
+            for season in st.session_state['sessions']:
                 k = f'{season}{i}'
                 if k in st.session_state:
                     st.session_state['student_plan'].fixed_core_course(k, session[k])

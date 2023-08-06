@@ -1,8 +1,12 @@
 CoursesID,Title,Prerequisites,Units
 CS 122A,Introduction to Data Management,ICS 33,4
 CS 132,Computer Networks,STATS 67,4
+CS 142A,Compilers and Interpreters,INF 101,4
 CS 143A,Principles of Operating Systems,ICS 46+ICS 51,4
+CS 145,Embedded Software,ICS 51+ICS 46,6
+CS 146,Programming in Multitasking Operating Systems,ICS 51+ICS 46,4
 CS 161,Design and Analysis of Algorithms,ICS 6B+ICS 6D+ICS 46,4
+CS 165,Project in Algorithms and Data Structures,CS 161,4
 ICS 139W,Critical Writing on Information Technology,,4
 ICS 31,Introduction to Programming,,4
 ICS 32,Programming with Software Libraries,ICS 31,4
