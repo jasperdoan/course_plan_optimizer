@@ -38,13 +38,15 @@ if __name__ == '__main__':
 # TODO:
 # [ ] Display multiple possible schedules
 
-# [ ] Add Summer session (if they want to take Summer classes) or Remove Winter (Semester instead of Quarter system)
-# [ ] Option to skip a quarter
+# [ ] Check for Summer classes, current scape doesn't include them
+# [ ] Ability to remove quarters, e.g. Remove Winter
+# [ ] Option to skip a quarter for planner
 
+# [ ] Scape by future years (ML Prediction...?)
 # [ ] Webscape prerequisites instead of manually adding them in csv file
 #       https://www.reg.uci.edu/cob/prrqcgi?term=202392&dept=IN4MATX&action=view_by_term#43
 #       https://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/softwareengineering_bs/#requirementstext
 
 # [ ] Refine GUI
 
-# [ ] Change implementation to MAX UNITS instead of MAX COURSES per semester
+# [ ] Make it applicable for all majors
