@@ -38,7 +38,7 @@ class CoursePlanner:
         self._pdag = self.__build_pdag(self._cdict)
         self._fdag = self.__build_fdag(self._cdict)
         self._session_val = {
-            f'{s}{i}': i*3 + idx 
+            f'{s}{i}': i*len(self.sessions) + idx 
                 for i in range(self.planned_years)
                 for idx, s in enumerate(self.sessions) 
         }

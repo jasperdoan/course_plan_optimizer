@@ -1,25 +1,11 @@
 import networkx as nx
 import streamlit as st
-import pandas as pd
 from typing import Type
 from collections import deque
 from functools import lru_cache
 from src.scraper import scape_read_csv
 from src.planner import CoursePlanner
 
-
-@st.cache_data
-def load_courses(path: str) -> dict:
-    df = pd.read_csv(path)
-    course_dict = {}
-    for _, row in df.iterrows():
-        course_id = row['CoursesID']
-        title = row['Title']
-        prereq = row['Prerequisites']
-        units = row['Units']
-        prereq_list = [] if pd.isnull(prereq) else prereq.split('+')
-        course_dict[course_id] = (title, prereq_list, units)
-    return course_dict
 
 
 @st.cache_data
