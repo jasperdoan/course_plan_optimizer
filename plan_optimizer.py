@@ -12,13 +12,19 @@ tab1, tab2, tab3 = st.tabs(CONFIG.tabs)
 
 with st.sidebar:
     ID = 'CoursesID'
-    core = pd.read_csv(CONFIG.swe)
-    electives = pd.read_csv(CONFIG.swe_ext)
-    all_courses = pd.concat([core, electives], ignore_index=True).sort_values(by=['CoursesID'])
-    
 
     st.sidebar.title('Major')
     major = st.sidebar.selectbox(*CONFIG.majors)
+
+    if major == 'Software Engineering':
+        core = pd.read_csv(CONFIG.swe)
+        electives = pd.read_csv(CONFIG.swe_ext)
+    else:
+        core = pd.read_csv(CONFIG.ds)
+        electives = pd.read_csv(CONFIG.ds_ext)
+
+    all_courses = pd.concat([core, electives], ignore_index=True).sort_values(by=['CoursesID'])
+    
 
     st.sidebar.title('Start Year')
     start_year = st.sidebar.text_input(*CONFIG.academic_years)
@@ -84,6 +90,7 @@ with tab2:
     # Keep for @cache_data
     availability_list = load_availability(CONFIG.availability)
 
+    # Filter out courses that are not offered this year
     courses_avail = {}
     for k in student_plan.course_dict.keys():
         if k in availability_list:
@@ -94,11 +101,11 @@ with tab2:
                 icon="⚠️"
                 )
 
-    session = {f'{s}{i}': [] for i in range(years) for s in quarter_seasons}
-
+    session = {}
     for i in range(years):
         for season in quarter_seasons:
             k = f'{season}{i}'
+            session.setdefault(k, [])
             session[k] = t2_rcol.multiselect(
                 f'**{k}**',
                 [k for k, v in courses_avail.items() if season in v],

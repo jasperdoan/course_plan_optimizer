@@ -7,6 +7,8 @@ class Config(NamedTuple):
     # Paths
     swe = 'data\software_engineering.csv'
     swe_ext = 'data\software_engineering_ext.csv'
+    ds = 'data\data_science.csv'
+    ds_ext = 'data\data_science_ext.csv'
     availability = 'data\courses_availability.csv'
     student_pick = 'data\\student_pick.csv'
 

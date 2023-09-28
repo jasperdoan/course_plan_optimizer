@@ -33,7 +33,7 @@ class CoursePlanner:
     def schedule(self) -> dict:
         return self._schedule
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self._cdict = self.__read_csv_to_dict()
         self._pdag = self.__build_pdag(self._cdict)
         self._fdag = self.__build_fdag(self._cdict)
@@ -41,7 +41,7 @@ class CoursePlanner:
             f'{s}{i}': i*len(self.sessions) + idx 
                 for i in range(self.planned_years)
                 for idx, s in enumerate(self.sessions) 
-        }
+            }
         self._schedule = {k: [] for k in self._session_val.keys()}
 
         self._visited = set()
@@ -58,7 +58,7 @@ class CoursePlanner:
                  [] if pd.isnull(row['Prerequisites']) else row['Prerequisites'].split('+'), 
                  row['Units']) 
             for _, row in df.iterrows()
-        }
+            }
 
 
     def __build_pdag(self, course_dict: dict) -> dict:
@@ -102,7 +102,7 @@ class CoursePlanner:
 
         # Add course to schedule logic
         min_window = get_score(-1, self._pdag, max)
-        max_window = get_score(self.planned_years * 3, self._fdag, min)
+        max_window = get_score(self.planned_years * len(self.sessions), self._fdag, min)
 
         for i in range(self.planned_years):
             for session in courses_avail[course]:

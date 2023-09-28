@@ -1,0 +1,26 @@
+CoursesID,Title,Prerequisites,Units
+ICS 6B,Boolean Logicand Discrete Structures,,4
+ICS 6D,Discrete Mathematics for Computer Science,,4
+ICS 6N,Computational Linear Algebra,ICS 31,4
+ICS 31,Introduction to Programming,,4
+ICS 32,Programming with Software Libraries,ICS 31,4
+ICS 33,Intermediate Programming,ICS 32,4
+ICS 45C,Programming in C/C++ as a Second Language,ICS 33,4
+ICS 46,Data Structure Implementation and Analysis,ICS 45C,4
+ICS 51,Introductory Computer Organization,ICS 6B+ICS 33,4
+ICS 139W,Critical Writing on Information Technology,,4
+STATS 5,Seminar in Data Science,,1
+STATS 7,Basic Statistics,,4
+STATS 68,Statistical Computing and Exploratory Data Analysis,STATS 7+ICS 31,4
+STATS 110,Statistical Methods for Data Analysis I,STATS 7,4
+STATS 111,Statistical Methods for Data Analysis II,STATS 110,4
+STATS 112,Statistical Methods for Data Analysis III,STATS 111,4
+STATS 115,Introduction to Bayesian Data Analysis,STATS 120C,4
+STATS 120A,Introduction to Probability and Statistics I,,4
+STATS 120B,Introduction to Probability and Statistics II,STATS 120A,4
+STATS 120C,Introduction to Probability and Statistics III,STATS 120B,4
+INF 43,Introduction to Software Engineering,ICS 32,4
+INF 143,Information Visualization,INF 43+ICS 31,4
+CS 122A,Introduction to Data Management,ICS 33,4
+CS 161,Design and Analysis of Algorithms,ICS 46+ICS 6B+ICS 6D,4
+CS 178,Machine Learning and Data-Mining,ICS 6B+ICS 6D+ICS 6N+STATS 7+STATS 120A,4

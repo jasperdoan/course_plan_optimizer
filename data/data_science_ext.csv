@@ -1,0 +1,19 @@
+CoursesID,Title,Prerequisites,Units
+STATS 140,Multivariate Statistical Methods,STATS 120C+ICS 6N,4
+ICS 53,Principles in System Design,ICS 46+ICS 51,6
+CS 111,Digital Image Processing,ICS 46+ICS 6D+ICS 6N,4
+CS 115,Computer Simulation,ICS 6B+ICS 6N+STATS 7+STATS 120A+ICS 51+INF 43,4
+CS 121,Information Retrieval,ICS 45C+STATS 7,4
+CS 122C,Principles of Data Management,CS 122A+ICS 53,4
+CS 125,Next Generation Search Systems,ICS 45C+STATS 7,4
+CS 131,Parallel and Distributed Computing,ICS 53,4
+CS 163,Graph Algorithms,CS 161,4
+CS 165,Project In Algorithms And Data Structures,CS 161,4
+CS 169,Introduction to Optimization,ICS 6N+STATS 7+STATS 120A,4
+CS 171,Introduction to Artificial Intelligence,STATS 7+STATS 120A+ICS 46,4
+CS 172B,Neural Networks and Deep Learning,STATS 120A+STATS 120B,4
+INF 131,Human Computer Interaction,ICS 31,4
+INF 141,Information Retrieval,ICS 45C+STATS 7,4
+INF 161,Social Analysis of Computing,ICS 31,4
+STATS 170A,Project in Data Science I,STATS 68+INF 43+CS 122A+CS 178+ICS 46+STATS 111,4
+STATS 170B,Project in Data Science II,STATS 170A+STATS 112,4
