@@ -50,3 +50,12 @@ Algo Output:
     Fall1	    INF 151	    INF 121	    INF 131	    CS 143A
     Winter1	    CS 161	    INF 122	    INF 124	    INF 191A
     Spring1	    CS 165      CS 145	    INF 191B	<NA>
+
+
+or
+    Fall0	    CS 122A	    ICS 6B	    INF 43	    STATS 67
+    Winter0	    ICS 139W	ICS 6D	    INF 101	    INF 113
+    Spring0	    CS 161	    CS 142A	    CS 146	    CS 132
+    Fall1	    INF 151	    INF 115	    INF 121	    CS 143A
+    Winter1	    INF 191A	INF 131	    INF 122	    INF 124
+    Spring1	    CS 165	    CS 145	    INF 191B	<NA>

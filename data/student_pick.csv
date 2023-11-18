@@ -1,31 +1,32 @@
 CoursesID,Title,Prerequisites,Units
-CS 121,Information Retrieval,ICS 45C+STATS 7,4
 CS 122A,Introduction to Data Management,ICS 33,4
-CS 161,Design and Analysis of Algorithms,ICS 46+ICS 6B+ICS 6D,4
-CS 171,Introduction to Artificial Intelligence,STATS 7+STATS 120A+ICS 46,4
-CS 178,Machine Learning and Data-Mining,ICS 6B+ICS 6D+ICS 6N+STATS 7+STATS 120A,4
+CS 132,Computer Networks,STATS 67,4
+CS 142A,Compilers and Interpreters,INF 101,4
+CS 143A,Principles of Operating Systems,ICS 46+ICS 51,4
+CS 145,Embedded Software,ICS 51+ICS 46,6
+CS 146,Programming in Multitasking Operating Systems,ICS 51+ICS 46,4
+CS 161,Design and Analysis of Algorithms,ICS 6B+ICS 6D+ICS 46,4
+CS 165,Project in Algorithms and Data Structures,CS 161,4
 ICS 139W,Critical Writing on Information Technology,,4
 ICS 31,Introduction to Programming,,4
 ICS 32,Programming with Software Libraries,ICS 31,4
 ICS 33,Intermediate Programming,ICS 32,4
 ICS 45C,Programming in C/C++ as a Second Language,ICS 33,4
+ICS 45J,Programming in Java as a Second Language,ICS 33,4
 ICS 46,Data Structure Implementation and Analysis,ICS 45C,4
 ICS 51,Introductory Computer Organization,ICS 6B+ICS 33,4
-ICS 53,Principles in System Design,ICS 46+ICS 51,6
 ICS 6B,Boolean Logicand Discrete Structures,,4
 ICS 6D,Discrete Mathematics for Computer Science,,4
 ICS 6N,Computational Linear Algebra,ICS 31,4
-INF 143,Information Visualization,INF 43+ICS 31,4
+INF 101,Concepts in Programming Languages I,ICS 51+ICS 46,4
+INF 113,Requirements Analysis and Engineering,INF 43+ICS 33,4
+INF 115,Software Testing Analysis and Quality Assurance,INF 43+ICS 45C,4
+INF 121,Software Design: Applications,ICS 33,4
+INF 122,Software Design: Structure and Implementation,INF 101+ICS 46,4
+INF 124,Internet Applications Engineering,CS 132+ICS 45J,4
+INF 131,Human Computer Interaction,ICS 31,4
+INF 151,Project Management,INF 43,4
+INF 191A,Senior Design Project,INF 121+INF 131+INF 151+INF 113,4
+INF 191B,Senior Design Project,INF 191A,4
 INF 43,Introduction to Software Engineering,ICS 32,4
-STATS 110,Statistical Methods for Data Analysis I,STATS 7,4
-STATS 111,Statistical Methods for Data Analysis II,STATS 110,4
-STATS 112,Statistical Methods for Data Analysis III,STATS 111,4
-STATS 115,Introduction to Bayesian Data Analysis,STATS 120C,4
-STATS 120A,Introduction to Probability and Statistics I,,4
-STATS 120B,Introduction to Probability and Statistics II,STATS 120A,4
-STATS 120C,Introduction to Probability and Statistics III,STATS 120B,4
-STATS 170A,Project in Data Science I,STATS 68+INF 43+CS 122A+CS 178+ICS 46+STATS 111,4
-STATS 170B,Project in Data Science II,STATS 170A+STATS 112,4
-STATS 5,Seminar in Data Science,,1
-STATS 68,Statistical Computing and Exploratory Data Analysis,STATS 7+ICS 31,4
-STATS 7,Basic Statistics,,4
+STATS 67,Introduction to Probability and Statistics for Computer Science,,4
