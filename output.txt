@@ -23,6 +23,10 @@ OG:
         INF 191A	INF 122	    INF 124     INF 141
         CS 165	    CS 145	    INF 191B	<NA>
 
+    (+) 
+        UNISTU 176: 87722
+
+
 
 INF 101 Mishap/Hiccup -> Replaced 142A with 141 for more reflexibility
 
@@ -51,6 +55,3 @@ INF 101 Mishap/Hiccup -> Replaced 142A with 141 for more reflexibility
         INF 101	    INF 151	    INF 121	    INF 141
         INF 191A	INF 122	    CS 143A	    INF 124
         CS 165	    CS 145	    INF 191B	<NA>
-
-    
-    UNISTU 176: 87722
