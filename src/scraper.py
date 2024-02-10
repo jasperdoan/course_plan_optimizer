@@ -1,10 +1,14 @@
+"""
+NO LONGER WORKS SINCE ICS UPDATED THEIR SITE
+"""
+
 import pandas as pd
 from urllib.request import urlopen
 from typing import NamedTuple
 
 
 class UCIScaperIdentifier(NamedTuple):
-    url_link: str = f'https://www.ics.uci.edu/ugrad/courses/listing-course.php'
+    url_link: str = f'https://courselisting.ics.uci.edu/ugrad_courses/listing-course.php'
     decoder: str = 'utf-8'
     stable: str = '["id":protected]=>'
     estable: str = '["description":protected]=>'
@@ -17,6 +21,7 @@ def scrape_avail_listings(year: int, department: str, level: str = 'ALL', progra
     uid = UCIScaperIdentifier()
     url = f'{uid.url_link}?year={year}&level={level}&department={department}&program={program}'
     html = urlopen(url).read().decode(uid.decoder)
+    print(html)
     sidx = html.find(uid.stable)
     eidx = html.find(uid.estable, sidx)
 
@@ -80,7 +85,7 @@ def scape_read_csv(file_path: str) -> dict:
 #     **scrape_avail_listings(year=2023, department='STATS')
 # }
 
-# csv_file_path = 'data\courses_availability.csv'
+# csv_file_path = 'courses_availability.csv'
 
 
 # # Change avail_dict.values() from list to string
