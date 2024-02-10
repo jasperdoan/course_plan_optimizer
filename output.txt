@@ -1,57 +1,41 @@
-OG:
+PLAN:
     CS 122A	    ICS 6B	    INF 43	    STATS 67
     ICS 139W	ICS 6D	    INF 101	    INF 113
 
-    - with -
-
-        CS 161	    CS 146	    CS 132      CS 142A
-        INF 151	    INF 121	    CS 143A     INF 115
-        INF 191A	INF 122	    INF 124     INF 131
-        CS 165	    CS 145	    INF 191B	<NA>
-
-                        - or -
-
-        CS 161	    CS 146	    CS 132      INF 141
-        INF 151	    INF 121	    CS 143A     INF 115
-        INF 191A	INF 122	    INF 124     INF 131
-        CS 165	    CS 145	    INF 191B	<NA>
-
-                        - or -
-
-        CS 161	    CS 146	    CS 132      INF 115	    
+    Current Path:
+        CS 161	    INF 143	    CS 132      INF 115	    
         INF 151	    INF 121	    CS 143A     INF 131	    
         INF 191A	INF 122	    INF 124     INF 141
         CS 165	    CS 145	    INF 191B	<NA>
 
-    (+) 
-        UNISTU 176: 87722
 
 
+SPRING 2024
+    CS161 DES & ANALYS of ALGOR
+        LEC: 34250
+        DIS: 34251 > 34251 > 34251 
 
-INF 101 Mishap/Hiccup -> Replaced 142A with 141 for more reflexibility
+    CS132 COMP NETWORKS
+        LEC: 34100
+        DIS: 34103 > 34102 > 34101 > 34104 > 34105
 
-    IF - CS 143A:
-    34160
-    34162
-        CS 161	    CS 132	    CS 146	    INF 115
-        INF 101	    INF 151	    INF 121	    INF 131
-        INF 191A	INF 122	    INF 124	    INF 141
-        CS 165	    CS 145	    INF 191B	<NA>
+    INF115 SW TEST & QUAL ASSUR
+        LEC: 36040
 
-
-    IF - INF 141:
-    36130
-    36131
-        CS 161	    CS 132	    CS 146	    INF 115
-        INF 101	    INF 151	    INF 121	    INF 131
-        INF 191A	INF 122	    INF 124	    CS 143A
-        CS 165	    CS 145	    INF 191B	<NA>
+    INF143 INF VISUALZTN
+        LEC: 36170
+        DIS: 36171
 
 
-    IF - INF 131:
-    36090
-    36093
-        CS 161	    CS 132	    CS 146	    INF 115
-        INF 101	    INF 151	    INF 121	    INF 141
-        INF 191A	INF 122	    CS 143A	    INF 124
-        CS 165	    CS 145	    INF 191B	<NA>
+    BACK UP PICKS:
+        INF141 INF RETRIEV
+            LEC: 36150
+            DIS: 36154 > 36153 > 36152
+
+        CS146 MULT OPER SYS
+            LEC: 34210
+            DIS: 34211
+
+        CS142A COMP & INTPRET
+            LEC: 34140
+            DIS: 34141 > 34145

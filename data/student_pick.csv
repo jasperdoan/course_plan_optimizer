@@ -3,7 +3,6 @@ CS 122A,Introduction to Data Management,ICS 33,4
 CS 132,Computer Networks,STATS 67,4
 CS 143A,Principles of Operating Systems,ICS 46+ICS 51,4
 CS 145,Embedded Software,ICS 51+ICS 46,6
-CS 146,Programming in Multitasking Operating Systems,ICS 51+ICS 46,4
 CS 161,Design and Analysis of Algorithms,ICS 6B+ICS 6D+ICS 46,4
 CS 165,Project in Algorithms and Data Structures,CS 161,4
 ICS 139W,Critical Writing on Information Technology,,4
@@ -25,6 +24,7 @@ INF 122,Software Design: Structure and Implementation,INF 101+ICS 46,4
 INF 124,Internet Applications Engineering,CS 132+ICS 45J,4
 INF 131,Human Computer Interaction,ICS 31,4
 INF 141,Information Retrieval,ICS 45C+STATS 67,4
+INF 143,Information Visualization,INF 43+ICS 31,4
 INF 151,Project Management,INF 43,4
 INF 191A,Senior Design Project,INF 121+INF 131+INF 151+INF 113,4
 INF 191B,Senior Design Project,INF 191A,4
