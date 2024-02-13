@@ -6,8 +6,9 @@ PLAN:
         CS 161	    INF 143	    CS 132      INF 115	    
         INF 151	    INF 121	    CS 143A     INF 131	    
         INF 191A	INF 122	    INF 124     INF 141
-        CS 165	    CS 145	    INF 191B	<NA>
+        CS 165	    _OPEN_      INF 191B	<NA>
 
+    _OPEN_ :: CS 145 / CS 146 / CS 133 / INF 132 / CS 142A
 
 
 SPRING 2024
