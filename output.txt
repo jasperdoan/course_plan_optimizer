@@ -2,44 +2,8 @@ PLAN:
     Fall0	    INF 43      STATS 67    ICS 6B      CS 122A
     Winter0	    INF 101	    ICS 6D	    INF 113 	ICS 139W
     Spring0	    CS 161	    CS 132	    INF 121	    INF 143
-    Fall1	    INF 115	    INF 151	    CS 143A	    INF 131
-    Winter1	    INF 191A	INF 122	    INF 124	    INF 141
-    Spring1	    INF 191B	_OPEN_	    CS 165	    <NA>
+    Fall1	    INF 141	    INF 151	    CS 143A	    INF 131
+    Winter1	    INF 191A	INF 122	    INF 124	    _OPEN_
+    Spring1	    INF 191B	INF 115	    CS 165	    <NA>
 
     _OPEN_ :: CS 145 / CS 146 / CS 133 / INF 132 / CS 142A
-
-
-SPRING 2024
-    CS161 DES & ANALYS of ALGOR
-        LEC: 34250
-        DIS: 34251 > 34251 > 34251 
-
-    CS132 COMP NETWORKS
-        LEC: 34100
-        DIS: 34103 > 34102 > 34101 > 34104 > 34105
-
-    INF143 INF VISUALZTN
-        LEC: 36170
-        DIS: 36171
-
-    INF121 SOFTWRE DESIGN I
-        LEC: 36070
-        DIS: 36074 > 36073 > 36072 > 36071
-
-
-    BACK UP PICKS:
-        INF141 INF RETRIEV
-            LEC: 36150
-            DIS: 36154 > 36153 > 36152
-
-        CS146 MULT OPER SYS
-            LEC: 34210
-            DIS: 34211
-
-        CS142A COMP & INTPRET
-            LEC: 34140
-            DIS: 34141 > 34145
-
-        INF131 HUMAN COMP INT   (IF 132 IS NO NO)
-            LEC: 36100
-            DIS: 36101 > 36102 > 36103 > 36104 > 36105
