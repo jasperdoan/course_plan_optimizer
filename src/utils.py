@@ -15,7 +15,7 @@ def load_availability(path: str) -> dict:
 
 @st.cache_data
 def topological_sort(dag: dict) -> dict:
-    @lru_cache(maxsize=None)
+    @lru_cache(maxsize=10)
     def dfs(course: str) -> None:
         visited.add(course)
         for prereq in dag[course]:
