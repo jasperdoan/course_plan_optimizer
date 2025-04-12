@@ -1,0 +1,17 @@
+I&C SCI 9
+
+Prerequisites vary.
+
+Recommended
+
+STATS 210B
+
+IN4MATX 232
+
+IN4MATX H198
+
+I&C SCI 139W
+
+COMPSCI 284A
+
+COMPSCI 273P

@@ -6,7 +6,8 @@ import re
 def clean_text(text):
     """Replace non-breaking spaces with regular spaces."""
     if isinstance(text, str):
-        return text.replace('\u00a0', ' ').strip()
+        # Remove \u00a0 (non-breaking space), leading/trailing whitespace, and any characters that comes after '.\n' and '.\n' themselves
+        return re.sub(r'\s+', ' ', text.replace('\u00a0', ' ').strip()).replace('.\n', '').replace('\n', '')
     return text
 
 def scrape_course_catalog(url):
@@ -65,6 +66,7 @@ def scrape_course_catalog(url):
         # Initialize optional fields
         prerequisites = "N/A"
         overlaps_with = "N/A"
+        same_as = "N/A"
         restriction = "N/A"
         grading_option = "N/A"
         
@@ -74,12 +76,14 @@ def scrape_course_catalog(url):
             
             if text.startswith("Prerequisite"):
                 prerequisites = clean_text(text[13:])
-            elif text.startswith("Overlaps with"):
-                overlaps_with = clean_text(text[13:])
+            elif text.startswith("Same as"):
+                same_as = clean_text(text[8:])
             elif text.startswith("Restriction"):
                 restriction = clean_text(text[11:])
             elif text.startswith("Grading Option"):
                 grading_option = clean_text(text[15:])
+            if "Overlaps with" in text:
+                overlaps_with = clean_text(text.split("Overlaps with")[1].strip())
         
         # Store course information
         courses[course_id] = {
@@ -88,6 +92,7 @@ def scrape_course_catalog(url):
             "description": description,
             "prerequisites": prerequisites,
             "overlaps_with": overlaps_with,
+            "same_as": same_as,
             "restriction": restriction,
             "grading_option": grading_option
         }
