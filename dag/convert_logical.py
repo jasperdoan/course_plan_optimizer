@@ -1,148 +1,203 @@
 import json
 import os
-import google.generativeai as genai
 import time
 import re
+import google.generativeai as genai
+from dotenv import load_dotenv
+import ast
 
-# Read from text file for prompt 
-FILE_PATH = "gemini_prompt.txt"
-with open(FILE_PATH, 'r', encoding='utf-8') as file:
-    PROMPT_TEMPLATE = file.read()
+def read_gemini_prompt():
+    """Read the Gemini prompt template from file."""
+    FILE_PATH = "gemini_prompt.txt"
+    try:
+        print(f"Reading prompt template from {FILE_PATH}...")
+        with open(FILE_PATH, 'r', encoding='utf-8') as file:
+            prompt = file.read()
+        print(f"Successfully loaded prompt template ({len(prompt)} characters)")
+        return prompt
+    except FileNotFoundError:
+        print(f"Error: {FILE_PATH} not found. Please create this file with the prompt template.")
+        return ""
 
-
-def setup_genai_api():
-    """Set up the Gemini API with the API key."""
-    api_key = ''
-    if not api_key:
-        raise ValueError("GOOGLE_API_KEY environment variable is not set")
+def initialize_gemini():
+    """Initialize and configure the Gemini model."""
+    print("Initializing Gemini model...")
+    load_dotenv()  # Load environment variables from .env file
+    api_key = os.getenv('GOOGLE_API_KEY')
     
-    genai.configure(api_key=api_key)
-    # Use Gemini 2.0 Flash model instead of Pro
-    return genai.GenerativeModel('gemini-2.0-flash')
-
-def parse_prerequisites_with_gemini(text, model):
-    """Parse prerequisites using Gemini API with rate limiting."""
-    if not text or text.strip() == "N/A":
+    if not api_key:
+        print("Warning: GOOGLE_API_KEY environment variable is not set. LLM validation will be skipped.")
         return None
     
-    prompt = PROMPT_TEMPLATE
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel('gemini-2.0-flash-lite')
+    print("Gemini model initialized successfully")
+    return model
+
+# Track API calls for rate limiting
+api_calls = {
+    'count': 0,
+    'last_reset_time': time.time(),
+    'minute_count': 0
+}
+
+def parse_with_gemini(model, prompt_template, prereq_text):
+    """
+    Use Gemini to parse prerequisite text into logical structure.
+    Implements rate limiting to prevent API rate limit errors.
+    """
+    if not prereq_text or prereq_text == "N/A":
+        print("  No prerequisites to parse")
+        return "N/A"
+    
+    if not model:
+        print("  Skipping LLM parsing (no model available)")
+        return "N/A"
+    
+    # Rate limiting logic - max 15 RPM (requests per minute)
+    current_time = time.time()
+    
+    # Reset the counter if a minute has passed
+    if current_time - api_calls['last_reset_time'] >= 60:
+        print(f"Resetting API rate limit counter (was {api_calls['minute_count']})")
+        api_calls['last_reset_time'] = current_time
+        api_calls['minute_count'] = 0
+    
+    # Check if we're at the rate limit
+    if api_calls['minute_count'] >= 14:  # Keep a buffer of 1 below the actual limit
+        wait_time = 60 - (current_time - api_calls['last_reset_time'])
+        if wait_time > 0:
+            print(f"Rate limit reached. Waiting for {wait_time:.2f} seconds...")
+            time.sleep(wait_time + 1)  # Add 1 second buffer
+            # Reset after waiting
+            api_calls['last_reset_time'] = time.time()
+            api_calls['minute_count'] = 0
+    
+    # Prepare the prompt with the current prereq text
+    prompt = f"{prompt_template}\n\nPrerequisite Text: {prereq_text}"
     
     try:
+        print(f"  Sending API request for: {prereq_text[:100]}{'...' if len(prereq_text) > 100 else ''}")
         response = model.generate_content(
-            f"{prompt}\n\n{str(text)}", 
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.0
-            ),
+            prompt,
+            generation_config=genai.types.GenerationConfig(temperature=0.0),
             stream=False
         )
         
-        # Extract JSON from the response
-        result = response.text
+        # Update API call tracking
+        api_calls['count'] += 1
+        api_calls['minute_count'] += 1
         
+        print(f"  API call successful. Total calls: {api_calls['count']}, Minute count: {api_calls['minute_count']}")
+        
+        # Extract the result from the response
+        result_text = response.text.strip()
+        print(f"  LLM raw output: {result_text}")
+        
+        # If the response is just "N/A" (with or without quotes), return "N/A"
+        if result_text in ['"N/A"', "'N/A'", "N/A"]:
+            return "N/A"
+        
+        # Clean up any markdown code block formatting
+        cleaned_text = re.sub(r'^```(?:json)?\s*', '', result_text)
+        cleaned_text = re.sub(r'\s*```$', '', cleaned_text)
+        
+        # Handle the response based on content type
+        try:
+            # First try parsing as JSON
+            final_result = json.loads(cleaned_text)
+            print(f"  Successfully parsed as JSON")
+            return final_result
+        except json.JSONDecodeError as json_err:
+            # Try to read it as a string and load it as a Python literal
+            print(f"  JSON parsing error: {json_err}")
+            final_result = f'{cleaned_text}'
+            print(f"  Successfully parsed as Python literal")
+            return final_result
 
-        if result:
-            # Clean up any markdown code block formatting if present
-            result = re.sub(r'^```json\s*', '', result)
-            result = re.sub(r'\s*```$', '', result)
-
-            print(result)
-
-            return json.loads(result)
-        return None
+            
     except Exception as e:
-        print(f"Error parsing prerequisites: {e}")
-        return {"error": str(e), "text": text}
+        print(f"  Error with LLM parsing: {e}")
+        return "N/A"
 
-def process_course_data(json_path, model):
-    """Process the course data and update with structured prerequisites."""
-    with open(json_path, 'r', encoding='utf-8') as file:
-        course_data = json.load(file)
-
-    total_courses = len(course_data)
-    processed = 0
+def convert_prereqs_to_logical_structure(json_data, output_file):
+    """
+    Process each course in the JSON data to convert prerequisites to logical structure.
+    """
+    # Initialize Gemini model
+    model = initialize_gemini()
+    prompt_template = read_gemini_prompt()
     
-    updated_course_data = {}
+    # Process each course
+    processed_count = 0
+    total_courses = len(json_data)
+    print(f"Starting processing of {total_courses} courses...")
     
-    # Track API calls per minute to respect rate limits
-    minute_start = time.time()
-    calls_in_current_minute = 0
+    start_time = time.time()
     
-    for course_id, course_info in course_data.items():
-        # Rate limiting: Check if we're approaching limits
-        current_time = time.time()
-        if current_time - minute_start > 60:
-            # Reset the counter for a new minute
-            minute_start = current_time
-            calls_in_current_minute = 0
+    for course_id, course_data in json_data.items():
+        processed_count += 1
+        print(f"\n[{processed_count}/{total_courses}] Processing course: {course_id}")
         
-        # If we're near the rate limit, pause
-        if calls_in_current_minute >= 12:  # 12 instead of 15 to be safe
-            sleep_time = 60 - (current_time - minute_start) + 1
-            if sleep_time > 0:
-                print(f"Approaching rate limit, pausing for {sleep_time:.1f}s...")
-                time.sleep(sleep_time)
-                minute_start = time.time()
-                calls_in_current_minute = 0
+        prereq_text = course_data.get("prerequisites", "N/A")
+        print(f"  Original prerequisites: {prereq_text}")
         
-        prereq_text = course_info.get('prerequisites', 'N/A')
+        # Parse prerequisites using Gemini
+        parsed_prereqs = parse_with_gemini(model, prompt_template, prereq_text)
+        print(f"  Parsed prerequisites: {parsed_prereqs}")
         
-        # Parse the prerequisites using Gemini
-        print(f"Parsing prerequisites for {course_id}...")
-        print(f"\n\n{prereq_text}")
-        structured_prereqs = parse_prerequisites_with_gemini(prereq_text, model)
-        calls_in_current_minute += 1
+        # Update the course data with the structured prerequisites
+        course_data["parsed_prerequisites"] = parsed_prereqs
         
-        # Add the updated course info to our new dictionary
-        updated_course_data[course_id] = {
-            "title": course_info.get('title', 'N/A'),
-            "units": course_info.get('units', 'N/A'),
-            "description": course_info.get('description', 'N/A'),
-            "prerequisites": structured_prereqs,
-            "overlaps_with": course_info.get('overlaps_with', 'N/A'),
-            "same_as": course_info.get('same_as', 'N/A'),
-            "restriction": course_info.get('restriction', 'N/A'),
-            "grading_option": course_info.get('grading_option', 'N/A')
-        }
-        
-        processed += 1
-        if processed % 5 == 0:
-            print(f"Processed {processed}/{total_courses} courses")
-            # Additional sleep to ensure we're well under the rate limit
-            time.sleep(0.5)
-        
-        # Every 100 requests, take a longer break to stay under token per minute limits
-        if processed % 100 == 0 and processed > 0:
-            print(f"Taking a break to respect TPM limits...")
-            time.sleep(5)
+        # Progress tracking and periodic saving
+        if processed_count % 10 == 0:
+            current_time = time.time()
+            elapsed_time = current_time - start_time
+            avg_time_per_course = elapsed_time / processed_count
+            estimated_time_remaining = avg_time_per_course * (total_courses - processed_count)
+            
+            print(f"\n>>> Progress update: Processed {processed_count}/{total_courses} courses ({processed_count/total_courses*100:.1f}%)")
+            print(f">>> Elapsed time: {elapsed_time:.1f}s, Est. time remaining: {estimated_time_remaining:.1f}s (~{estimated_time_remaining/60:.1f} min)")
+            
+            # Periodically save in case of interruption
+            with open(f"{output_file}.partial", 'w', encoding='utf-8') as f:
+                json.dump(json_data, f, indent=4)
+            print(f"Saved intermediate results to {output_file}.partial")
     
-    return updated_course_data
-
-def save_course_data(course_data, output_path):
-    """Save the updated course data to a JSON file."""
-    with open(output_path, 'w', encoding='utf-8') as file:
-        json.dump(course_data, file, indent=4)
+    # Save the final updated data to the output JSON file
+    print(f"\nProcessing complete. Saving final results to {output_file}...")
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(json_data, f, indent=4)
+    
+    print(f"Completed processing {processed_count} courses. Output saved to {output_file}")
+    print(f"Total API calls made: {api_calls['count']}")
 
 def main():
-    """Main function to parse prerequisites with Gemini."""
-    try:
-        # Set up the Gemini API
-        model = setup_genai_api()
-        
-        # Path to the course data JSON file
-        input_path = 'course_data.json'
-        output_path = 'course_data_structured.json'
-        
-        # Process the course data
-        print(f"Processing course data from {input_path}")
-        updated_course_data = process_course_data(input_path, model)
-        
-        # Save the updated course data
-        save_course_data(updated_course_data, output_path)
-        print(f"Updated course data saved to {output_path}")
+    """Main function to process course data."""
+    print("=== Starting Course Prerequisite Processing ===")
+    input_file = "course_data.json"
+    output_file = "course_data_with_logical_prereqs.json"
     
-        
-    except Exception as e:
-        print(f"Error: {e}")
+    # Load the course data
+    print(f"Loading course data from {input_file}...")
+    try:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            json_data = json.load(f)
+        print(f"Successfully loaded {len(json_data)} courses from {input_file}")
+    except FileNotFoundError:
+        print(f"Error: {input_file} not found.")
+        return
+    except json.JSONDecodeError:
+        print(f"Error: {input_file} contains invalid JSON.")
+        return
+    
+    # Process the data
+    start_time = time.time()
+    convert_prereqs_to_logical_structure(json_data, output_file)
+    end_time = time.time()
+    
+    print(f"=== Processing Complete ===")
+    print(f"Total execution time: {end_time - start_time:.2f} seconds")
 
 if __name__ == "__main__":
     main()
