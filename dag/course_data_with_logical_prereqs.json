@@ -19,17 +19,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            },
-            "I&C SCI 6D",
-            {
-                "MATH 3A": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                "I&C SCI 6D",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 112": {
         "title": "Computer Graphics",
@@ -40,13 +46,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 46",
-            {
-                "MATH 3A": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 46",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 113": {
         "title": "Computer Game Development",
@@ -58,12 +68,14 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 112": null,
-            "COMPSCI 171": null,
-            "IN4MATX 121": null,
-            "ART 106B": null,
-            "I&C SCI 163": null,
-            "I&C SCI 166": null
+            "or": [
+                "COMPSCI 112",
+                "COMPSCI 171",
+                "IN4MATX 121",
+                "ART 106B",
+                "I&C SCI 163",
+                "I&C SCI 166"
+            ]
         }
     },
     "COMPSCI 114": {
@@ -75,13 +87,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 112",
-            {
-                "I&C SCI 45C": null,
-                "CSE 45C": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 112",
+                {
+                    "or": [
+                        "I&C SCI 45C",
+                        "CSE 45C"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 115": {
         "title": "Computer Simulation",
@@ -92,22 +108,26 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 6B",
-            [
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6B",
                 {
-                    "I&C SCI 6N": null,
-                    "MATH 3A": null
-                }
-            ],
-            {
-                "STATS 67": null,
-                "STATS 7": null
-            },
-            "STATS 120A",
-            "I&C SCI 51",
-            "IN4MATX 43"
-        ]
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                },
+                {
+                    "or": [
+                        "STATS 67",
+                        "STATS 7"
+                    ]
+                },
+                "STATS 120A",
+                "I&C SCI 51",
+                "IN4MATX 43"
+            ]
+        }
     },
     "COMPSCI 116": {
         "title": "Computational Photography and Vision",
@@ -118,21 +138,25 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 6D",
-            [
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6D",
                 {
-                    "MATH 6G": null,
-                    "MATH 3A": null,
-                    "I&C SCI 6N": null
+                    "or": [
+                        "MATH 6G",
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
                 },
                 "MATH 2B",
                 {
-                    "I&C SCI 46": null,
-                    "CSE 46": null
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
                 }
             ]
-        ]
+        }
     },
     "COMPSCI 117": {
         "title": "Project in Computer Vision",
@@ -143,26 +167,32 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 6D",
-            [
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6D",
                 {
-                    "MATH 3A": null,
-                    "I&C SCI 6N": null
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                },
+                "MATH 2B",
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                {
+                    "or": [
+                        "COMPSCI 112",
+                        "COMPSCI 116",
+                        "COMPSCI 171",
+                        "COMPSCI 178"
+                    ]
                 }
-            ],
-            "MATH 2B",
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            },
-            {
-                "COMPSCI 112": null,
-                "COMPSCI 116": null,
-                "COMPSCI 171": null,
-                "COMPSCI 178": null
-            }
-        ]
+            ]
+        }
     },
     "COMPSCI 118": {
         "title": "Introduction to Virtual Reality",
@@ -173,13 +203,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null
-            },
-            "I&C SCI 33"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                },
+                "I&C SCI 33"
+            ]
+        }
     },
     "COMPSCI 121": {
         "title": "Information Retrieval",
@@ -190,16 +224,22 @@
         "same_as": "IN4MATX 141.",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 45C": null,
-                "I&C SCI 45J": null
-            },
-            {
-                "STATS 7": null,
-                "STATS 67": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 45C",
+                        "I&C SCI 45J"
+                    ]
+                },
+                {
+                    "or": [
+                        "STATS 7",
+                        "STATS 67"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 122A": {
         "title": "Introduction to Data Management",
@@ -211,8 +251,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 33": null,
-            "EECS 114": null
+            "or": [
+                "I&C SCI 33",
+                "EECS 114"
+            ]
         }
     },
     "COMPSCI 122B": {
@@ -224,16 +266,22 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "COMPSCI 122A": null,
-                "EECS 116": null
-            },
-            {
-                "I&C SCI 45J": null,
-                "AP Computer Science A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "COMPSCI 122A",
+                        "EECS 116"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 45J",
+                        "AP Computer Science A"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 122C": {
         "title": "Principles of Data Management",
@@ -244,13 +292,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 122A",
-            {
-                "I&C SCI 53": null,
-                "COMPSCI 143A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 122A",
+                {
+                    "or": [
+                        "I&C SCI 53",
+                        "COMPSCI 143A"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 122D": {
         "title": "Beyond SQL Data Management",
@@ -261,19 +313,23 @@
         "same_as": "N/A",
         "restriction": ": Computer Science Majors have first consideration for enrollment. Computer Science and Engineering and all School of ICS majors have second right of consideration.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 46",
-            [
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 46",
                 {
-                    "I&C SCI 51": null,
-                    "EECS 31": null
+                    "or": [
+                        "I&C SCI 51",
+                        "EECS 31"
+                    ]
                 },
                 {
-                    "COMPSCI 122A": null,
-                    "EECS 116": null
+                    "or": [
+                        "COMPSCI 122A",
+                        "EECS 116"
+                    ]
                 }
             ]
-        ]
+        }
     },
     "COMPSCI 125": {
         "title": "Next Generation Search Systems",
@@ -284,16 +340,22 @@
         "same_as": "N/A",
         "restriction": ": Upper-division students only. Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 45C": null,
-                "I&C SCI 45J": null
-            },
-            {
-                "STATS 7": null,
-                "STATS 67": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 45C",
+                        "I&C SCI 45J"
+                    ]
+                },
+                {
+                    "or": [
+                        "STATS 7",
+                        "STATS 67"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 131": {
         "title": "Parallel and Distributed Computing",
@@ -305,8 +367,10 @@
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 53": null,
-            "COMPSCI 143A": null
+            "or": [
+                "I&C SCI 53",
+                "COMPSCI 143A"
+            ]
         }
     },
     "COMPSCI 132": {
@@ -319,8 +383,10 @@
         "restriction": ": Computer Engineering Majors have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "EECS 55": null,
-            "STATS 67": null
+            "or": [
+                "EECS 55",
+                "STATS 67"
+            ]
         }
     },
     "COMPSCI 133": {
@@ -333,8 +399,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 132": null,
-            "EECS 148": null
+            "or": [
+                "COMPSCI 132",
+                "EECS 148"
+            ]
         }
     },
     "COMPSCI 134": {
@@ -346,14 +414,18 @@
         "same_as": "N/A",
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "COMPSCI 132": null,
-                "EECS 148": null
-            },
-            "COMPSCI 161",
-            "I&C SCI 53"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "COMPSCI 132",
+                        "EECS 148"
+                    ]
+                },
+                "COMPSCI 161",
+                "I&C SCI 53"
+            ]
+        }
     },
     "COMPSCI 137": {
         "title": "Internet Applications Engineering",
@@ -364,13 +436,17 @@
         "same_as": "IN4MATX 124. Overlaps with COMPSCI 122B.",
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "COMPSCI 132": null,
-                "EECS 148": null
-            },
-            "I&C SCI 45J"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "COMPSCI 132",
+                        "EECS 148"
+                    ]
+                },
+                "I&C SCI 45J"
+            ]
+        }
     },
     "COMPSCI 141": {
         "title": "Concepts in Programming Languages I",
@@ -381,17 +457,23 @@
         "same_as": "IN4MATX 101.",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 51": null,
-                "CSE 31": null,
-                "EECS 31": null
-            },
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 51",
+                        "CSE 31",
+                        "EECS 31"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 142A": {
         "title": "Compilers and Interpreters",
@@ -403,9 +485,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "CSE 141": null,
-            "COMPSCI 141": null,
-            "IN4MATX 101": null
+            "or": [
+                "CSE 141",
+                "COMPSCI 141",
+                "IN4MATX 101"
+            ]
         }
     },
     "COMPSCI 142B": {
@@ -418,8 +502,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 142A": null,
-            "CSE 142": null
+            "or": [
+                "COMPSCI 142A",
+                "CSE 142"
+            ]
         }
     },
     "COMPSCI 143A": {
@@ -431,17 +517,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            },
-            {
-                "I&C SCI 51": null,
-                "EECS 31": null,
-                "CSE 31": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 51",
+                        "EECS 31",
+                        "CSE 31"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 143B": {
         "title": "Project in Operating System Organization",
@@ -463,17 +555,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "CSE 46": null,
-                "I&C SCI 46": null
-            },
-            {
-                "I&C SCI 51": null,
-                "EECS 31": null,
-                "CSE 31": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "CSE 46",
+                        "I&C SCI 46"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 51",
+                        "EECS 31",
+                        "CSE 31"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 146": {
         "title": "Programming in Multitasking Operating Systems",
@@ -484,10 +582,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 46",
-            "I&C SCI 51"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                "I&C SCI 51"
+            ]
+        }
     },
     "COMPSCI 147": {
         "title": "Internet of Things (IoT) Software and Systems",
@@ -499,8 +604,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 33": null,
-            "CSE 43": null
+            "or": [
+                "I&C SCI 33",
+                "CSE 43"
+            ]
         }
     },
     "COMPSCI 151": {
@@ -512,15 +619,19 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 33": null,
-                "CSE 43": null
-            },
-            "I&C SCI 51",
-            "I&C SCI 6B",
-            "I&C SCI 6D"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 33",
+                        "CSE 43"
+                    ]
+                },
+                "I&C SCI 51",
+                "I&C SCI 6B",
+                "I&C SCI 6D"
+            ]
+        }
     },
     "COMPSCI 152": {
         "title": "Computer Systems Architecture",
@@ -564,15 +675,19 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Software Engineering Majors have first consideration for enrollment. Data Science Majors have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment. Computer Science Majors have first consideration for enrollment. Business Information Management, Computer Game Science, and Informatics majors have second right of consideration.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            },
-            "I&C SCI 6B",
-            "I&C SCI 6D",
-            "MATH 2B"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                "I&C SCI 6B",
+                "I&C SCI 6D",
+                "MATH 2B"
+            ]
+        }
     },
     "COMPSCI 162": {
         "title": "Formal Languages and Automata",
@@ -583,15 +698,19 @@
         "same_as": "LSCI 102.",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Cognitive Sciences Majors have first consideration for enrollment. Language Science Majors have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 2B",
-            "I&C SCI 6B",
-            "I&C SCI 6D",
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                "MATH 2B",
+                "I&C SCI 6B",
+                "I&C SCI 6D"
+            ]
+        }
     },
     "COMPSCI 163": {
         "title": "Graph Algorithms",
@@ -603,8 +722,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 161": null,
-            "CSE 161": null
+            "or": [
+                "COMPSCI 161",
+                "CSE 161"
+            ]
         }
     },
     "COMPSCI 164": {
@@ -617,8 +738,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 46": null,
-            "CSE 46": null
+            "or": [
+                "I&C SCI 46",
+                "CSE 46"
+            ]
         }
     },
     "COMPSCI 165": {
@@ -631,8 +754,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Majors have first consideration for enrollment. Computer Science and Engineering majors and all School of ICS majors have second right of consideration.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 161": null,
-            "CSE 161": null
+            "or": [
+                "COMPSCI 161",
+                "CSE 161"
+            ]
         }
     },
     "COMPSCI 166": {
@@ -644,16 +769,22 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null
-            },
-            {
-                "COMPSCI 161": null,
-                "PHYSICS 113A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                },
+                {
+                    "or": [
+                        "COMPSCI 161",
+                        "PHYSICS 113A"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 167": {
         "title": "Introduction to Applied Cryptography",
@@ -665,8 +796,10 @@
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 161": null,
-            "CSE 161": null
+            "or": [
+                "COMPSCI 161",
+                "CSE 161"
+            ]
         }
     },
     "COMPSCI 169": {
@@ -678,7 +811,27 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": "[{\"I&C SCI 6N\": null, \"MATH 3A\": null}, {\"STATS 67\": null, [\"STATS 7\", \"STATS 120A\"]}]"
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                },
+                {
+                    "or": [
+                        "STATS 67",
+                        {
+                            "and": [
+                                "STATS 7",
+                                "STATS 120A"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 171": {
         "title": "Introduction to Artificial Intelligence",
@@ -689,15 +842,23 @@
         "same_as": "N/A",
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "STATS 7": null,
-                "STATS 120A": null
-            },
-            "STATS 67",
-            "I&C SCI 46",
-            "MATH 2B"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        {
+                            "and": [
+                                "STATS 7",
+                                "STATS 120A"
+                            ]
+                        },
+                        "STATS 67"
+                    ]
+                },
+                "I&C SCI 46",
+                "MATH 2B"
+            ]
+        }
     },
     "COMPSCI 172B": {
         "title": "Neural Networks and Deep Learning",
@@ -708,17 +869,19 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "STATS 120A": null,
-                "STATS 120B": null
-            },
-            {
-                "MATH 121A": null,
-                "COMPSCI 178": null,
-                "COMPSCI 273A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "or": [
+                {
+                    "and": [
+                        "STATS 120A",
+                        "STATS 120B"
+                    ]
+                },
+                "MATH 121A",
+                "COMPSCI 178",
+                "COMPSCI 273A"
+            ]
+        }
     },
     "COMPSCI 172C": {
         "title": "Artificial Intelligence Frontiers: Technical, Ethical, and Societal",
@@ -729,10 +892,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 171",
-            "COMPSCI 172B"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 171",
+                "COMPSCI 172B"
+            ]
+        }
     },
     "COMPSCI 175": {
         "title": "Project in Artificial Intelligence",
@@ -743,10 +908,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 171",
-            "COMPSCI 178"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 171",
+                "COMPSCI 178"
+            ]
+        }
     },
     "COMPSCI 177": {
         "title": "Applications of Probability in Computer Science",
@@ -757,16 +924,20 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 2B",
-            "STATS 67",
-            "I&C SCI 6B",
-            "I&C SCI 6D",
-            {
-                "MATH 3A": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 2B",
+                "STATS 67",
+                "I&C SCI 6B",
+                "I&C SCI 6D",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 178": {
         "title": "Machine Learning and Data-Mining",
@@ -777,7 +948,30 @@
         "same_as": "N/A",
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": "[\"I&C SCI 6B\", \"I&C SCI 6D\", {\"I&C SCI 6N\": null, \"MATH 3A\": null}, \"MATH 2B\", {\"STATS 67\": null, [\"STATS 7\", \"STATS 120A\"]}]"
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6B",
+                "I&C SCI 6D",
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                },
+                "MATH 2B",
+                {
+                    "or": [
+                        "STATS 67",
+                        {
+                            "and": [
+                                "STATS 7",
+                                "STATS 120A"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 179": {
         "title": "Algorithms for Probabilistic and Deterministic Graphical Models",
@@ -822,10 +1016,12 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2D": null,
-            "MATH 3A": null,
-            "STATS 7": null,
-            "STATS 8": null
+            "or": [
+                "MATH 2D",
+                "MATH 3A",
+                "STATS 7",
+                "STATS 8"
+            ]
         }
     },
     "COMPSCI 184A": {
@@ -838,8 +1034,10 @@
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 6N": null,
-            "MATH 3A": null
+            "or": [
+                "I&C SCI 6N",
+                "MATH 3A"
+            ]
         }
     },
     "COMPSCI 184C": {
@@ -918,8 +1116,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 260": null,
-            "COMPSCI 263": null
+            "or": [
+                "COMPSCI 260",
+                "COMPSCI 263"
+            ]
         }
     },
     "COMPSCI 201P": {
@@ -942,10 +1142,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 260",
-            "COMPSCI 263"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 260",
+                "COMPSCI 263"
+            ]
+        }
     },
     "COMPSCI 203": {
         "title": "Network and Distributed Systems Security",
@@ -957,8 +1159,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "EECS 148": null,
-            "COMPSCI 132": null
+            "or": [
+                "EECS 148",
+                "COMPSCI 132"
+            ]
         }
     },
     "COMPSCI 203P": {
@@ -971,8 +1175,10 @@
         "restriction": ": Graduate students only. Master of Computer Science Degree students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 201P": null,
-            "COMPSCI 202P": null
+            "or": [
+                "COMPSCI 201P",
+                "COMPSCI 202P"
+            ]
         }
     },
     "COMPSCI 204": {
@@ -995,11 +1201,13 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Graduate students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 134",
-            "COMPSCI 142A",
-            "COMPSCI 143A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 134",
+                "COMPSCI 142A",
+                "COMPSCI 143A"
+            ]
+        }
     },
     "COMPSCI 206": {
         "title": "Principles of Scientific Computing",
@@ -1087,18 +1295,20 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 6D",
-            [
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6D",
                 {
-                    "I&C SCI 6N": null,
-                    "MATH 6G": null,
-                    "MATH 3A": null
-                }
-            ],
-            "MATH 2B",
-            "I&C SCI 46"
-        ]
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 6G",
+                        "MATH 3A"
+                    ]
+                },
+                "MATH 2B",
+                "I&C SCI 46"
+            ]
+        }
     },
     "COMPSCI 217": {
         "title": "Light and Geometry in Computer Vision",
@@ -1109,17 +1319,21 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 6D",
-            {
-                "I&C SCI 6N": null,
-                "MATH 6G": null,
-                "MATH 3A": null
-            },
-            "MATH 2B",
-            "I&C SCI 46",
-            "COMPSCI 211A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 6D",
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 6G",
+                        "MATH 3A"
+                    ]
+                },
+                "MATH 2B",
+                "I&C SCI 46",
+                "COMPSCI 211A"
+            ]
+        }
     },
     "COMPSCI 219S": {
         "title": "Seminar in Graphics and Visualization",
@@ -1152,15 +1366,19 @@
         "same_as": "SWE 225.",
         "restriction": ": Graduate students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 161",
-            "COMPSCI 171",
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null,
-                "MATH 6G": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 161",
+                "COMPSCI 171",
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A",
+                        "MATH 6G"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 222": {
         "title": "Principles of Data Management",
@@ -1171,13 +1389,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 122A",
-            {
-                "I&C SCI 53": null,
-                "COMPSCI 143A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 122A",
+                {
+                    "or": [
+                        "I&C SCI 53",
+                        "COMPSCI 143A"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 222P": {
         "title": "Principles of Data Management",
@@ -1211,8 +1433,10 @@
         "restriction": ": Master of Computer Science Degree students only. Master of Data Science Degree students only. Graduate students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 222P": null,
-            "COMPSCI 222": null
+            "or": [
+                "COMPSCI 222P",
+                "COMPSCI 222"
+            ]
         }
     },
     "COMPSCI 224P": {
@@ -1225,8 +1449,10 @@
         "restriction": ": Master of Computer Science Degree students only. Master of Data Science Degree students only. Graduate students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 220P": null,
-            "COMPSCI 122A": null
+            "or": [
+                "COMPSCI 220P",
+                "COMPSCI 122A"
+            ]
         }
     },
     "COMPSCI 230": {
@@ -1261,8 +1487,10 @@
         "restriction": ": Graduate students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "EECS 148": null,
-            "COMPSCI 132": null
+            "or": [
+                "EECS 148",
+                "COMPSCI 132"
+            ]
         }
     },
     "COMPSCI 232P": {
@@ -1286,8 +1514,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "EECS 148": null,
-            "COMPSCI 132": null
+            "or": [
+                "EECS 148",
+                "COMPSCI 132"
+            ]
         }
     },
     "COMPSCI 234": {
@@ -1300,9 +1530,11 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "NET SYS 201": null,
-            "COMPSCI 232": null,
-            "EECS 248A": null
+            "or": [
+                "NET SYS 201",
+                "COMPSCI 232",
+                "EECS 248A"
+            ]
         }
     },
     "COMPSCI 236": {
@@ -1315,8 +1547,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "EECS 148": null,
-            "COMPSCI 132": null
+            "or": [
+                "EECS 148",
+                "COMPSCI 132"
+            ]
         }
     },
     "COMPSCI 237": {
@@ -1394,17 +1628,21 @@
         "same_as": "IN4MATX 244.",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 51",
-            "COMPSCI 152",
-            "COMPSCI 161",
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null,
-                "MATH 6G": null,
-                "I&C SCI 6D": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 51",
+                "COMPSCI 152",
+                "COMPSCI 161",
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A",
+                        "MATH 6G",
+                        "I&C SCI 6D"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 244P": {
         "title": "Internet of Things",
@@ -1426,11 +1664,7 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": {
-            "COMPSCI 222": null,
-            "COMPSCI 238": null,
-            "COMPSCI 241": null
-        }
+        "parsed_prerequisites": "N/A"
     },
     "COMPSCI 248A": {
         "title": "Introduction to Ubiquitous Computing",
@@ -1452,10 +1686,12 @@
         "same_as": "IN4MATX 242.",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 231",
-            "IN4MATX 241"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "IN4MATX 231",
+                "IN4MATX 241"
+            ]
+        }
     },
     "COMPSCI 250A": {
         "title": "Computer Systems Architecture",
@@ -1576,10 +1812,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 46",
-            "COMPSCI 161"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 46",
+                "COMPSCI 161"
+            ]
+        }
     },
     "COMPSCI 261P": {
         "title": "Data Structures with Applications",
@@ -1612,10 +1850,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 161",
-            "COMPSCI 261"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 161",
+                "COMPSCI 261"
+            ]
+        }
     },
     "COMPSCI 265": {
         "title": "Graph Algorithms",
@@ -1626,10 +1866,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 161",
-            "COMPSCI 261"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 161",
+                "COMPSCI 261"
+            ]
+        }
     },
     "COMPSCI 266": {
         "title": "Computational Geometry",
@@ -1640,10 +1882,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 161",
-            "COMPSCI 261"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 161",
+                "COMPSCI 261"
+            ]
+        }
     },
     "COMPSCI 268": {
         "title": "Introduction to Optimization",
@@ -1654,19 +1898,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "STATS 67": null
-            },
-            [
-                "STATS 7",
-                "STATS 120A"
-            ],
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "or": [
+                "STATS 67",
+                {
+                    "and": [
+                        "STATS 7",
+                        "STATS 120A"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 268P": {
         "title": "Optimization Modeling",
@@ -1721,10 +1969,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Graduate students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 171",
-            "COMPSCI 178"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 171",
+                "COMPSCI 178"
+            ]
+        }
     },
     "COMPSCI 273A": {
         "title": "Machine Learning",
@@ -1735,10 +1985,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "COMPSCI 271",
-            "COMPSCI 206"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "COMPSCI 271",
+                "COMPSCI 206"
+            ]
+        }
     },
     "COMPSCI 273P": {
         "title": "Machine Learning and Data Mining",
@@ -1782,17 +2034,19 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "STATS 120A": null,
-                "STATS 120B": null
-            },
-            {
-                "MATH 121A": null,
-                "COMPSCI 178": null,
-                "COMPSCI 273A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "or": [
+                {
+                    "and": [
+                        "STATS 120A",
+                        "STATS 120B"
+                    ]
+                },
+                "MATH 121A",
+                "COMPSCI 178",
+                "COMPSCI 273A"
+            ]
+        }
     },
     "COMPSCI 274D": {
         "title": "Artificial Intelligence Frontiers: Technical, Ethical, and Societal",
@@ -1815,9 +2069,11 @@
         "restriction": ": Graduate students only. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 178": null,
-            "COMPSCI 273A": null,
-            "STATS 120B": null
+            "or": [
+                "COMPSCI 178",
+                "COMPSCI 273A",
+                "STATS 120B"
+            ]
         }
     },
     "COMPSCI 274P": {
@@ -1874,8 +2130,10 @@
         "restriction": ": Graduate students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 178": null,
-            "COMPSCI 273A": null
+            "or": [
+                "COMPSCI 178",
+                "COMPSCI 273A"
+            ]
         }
     },
     "COMPSCI 278": {
@@ -1910,8 +2168,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "A Basic course in algorithms": null,
-            "A basic course in molecular biology": null
+            "or": [
+                "A Basic course in algorithms",
+                "A basic course in molecular biology"
+            ]
         }
     },
     "COMPSCI 284C": {
@@ -1923,7 +2183,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": "{\"COMPSCI 284A\": null, [\"BIO SCI 99\", \"MATH 2D\"]}"
+        "parsed_prerequisites": {
+            "or": [
+                "COMPSCI 284A",
+                {
+                    "and": [
+                        "BIO SCI 99",
+                        "MATH 2D"
+                    ]
+                }
+            ]
+        }
     },
     "COMPSCI 287": {
         "title": "Approximation Algorithms",
@@ -2133,9 +2403,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 31": null,
-            "I&C SCI 32A": null,
-            "AP Computer Science A": null
+            "or": [
+                "I&C SCI 31",
+                "I&C SCI 32A",
+                "AP Computer Science A"
+            ]
         }
     },
     "I&C SCI 7": {
@@ -2159,9 +2431,11 @@
         "restriction": ": Lower-division students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2A": null,
-            "AP Calculus AB": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2A",
+                "AP Calculus AB",
+                "AP Calculus BC"
+            ]
         }
     },
     "I&C SCI 10": {
@@ -2240,9 +2514,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 32": null,
-            "CSE 42": null,
-            "I&C SCI 32A": null
+            "or": [
+                "I&C SCI 32",
+                "CSE 42",
+                "I&C SCI 32A"
+            ]
         }
     },
     "I&C SCI 45C": {
@@ -2255,9 +2531,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 33": null,
-            "CSE 43": null,
-            "EECS 40": null
+            "or": [
+                "I&C SCI 33",
+                "CSE 43",
+                "EECS 40"
+            ]
         }
     },
     "I&C SCI 45J": {
@@ -2270,8 +2548,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment. I&C SCI 45J may not be taken for credit after I&C SCI 22, I&C SCI 23, or CSE 23.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 33": null,
-            "CSE 43": null
+            "or": [
+                "I&C SCI 33",
+                "CSE 43"
+            ]
         }
     },
     "I&C SCI 46": {
@@ -2283,10 +2563,12 @@
         "same_as": "N/A",
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 33",
-            "I&C SCI 45C"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 33",
+                "I&C SCI 45C"
+            ]
+        }
     },
     "I&C SCI 51": {
         "title": "Introductory Computer Organization",
@@ -2297,10 +2579,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 33",
-            "I&C SCI 6B"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 33",
+                "I&C SCI 6B"
+            ]
+        }
     },
     "I&C SCI 53": {
         "title": "Principles in System Design",
@@ -2311,10 +2595,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 46",
-            "I&C SCI 51"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 46",
+                "I&C SCI 51"
+            ]
+        }
     },
     "I&C SCI 60": {
         "title": "Games and Society",
@@ -2392,9 +2678,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 45C": null,
-            "GDIM 32": null,
-            "I&C SCI 167": null
+            "or": [
+                "I&C SCI 45C",
+                "GDIM 32",
+                "I&C SCI 167"
+            ]
         }
     },
     "I&C SCI 162": {
@@ -2417,18 +2705,24 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 61": null,
-                "GDIM 25": null
-            },
-            {
-                "GDIM 31": null,
-                "I&C SCI 10": null,
-                "I&C SCI 31": null,
-                "I&C SCI 32A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 61",
+                        "GDIM 25"
+                    ]
+                },
+                {
+                    "or": [
+                        "GDIM 31",
+                        "I&C SCI 10",
+                        "I&C SCI 31",
+                        "I&C SCI 32A"
+                    ]
+                }
+            ]
+        }
     },
     "I&C SCI 166": {
         "title": "Game Design",
@@ -2440,8 +2734,10 @@
         "restriction": ": Computer Game Science Majors have first consideration for enrollment. Game Design and Interactive Media students have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment. School of ICS majors have second consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 61": null,
-            "GDIM 25": null
+            "or": [
+                "I&C SCI 61",
+                "GDIM 25"
+            ]
         }
     },
     "I&C SCI 167": {
@@ -2454,8 +2750,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Game Science Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 51": null,
-            "GDIM 31": null
+            "or": [
+                "I&C SCI 51",
+                "GDIM 31"
+            ]
         }
     },
     "I&C SCI 168": {
@@ -2467,20 +2765,28 @@
         "same_as": "GDIM 161.",
         "restriction": ": Computer Game Science Majors have first consideration for enrollment. Game Design and Interactive Media students have first consideration for enrollment. School of ICS majors have second consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "GDIM 27": null,
-                "I&C SCI 166": null
-            },
-            {
-                "GDIM 33": null,
-                "I&C SCI 161": null
-            },
-            {
-                "GDIM 61": null,
-                "I&C SCI 62": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "GDIM 27",
+                        "I&C SCI 166"
+                    ]
+                },
+                {
+                    "or": [
+                        "GDIM 33",
+                        "I&C SCI 161"
+                    ]
+                },
+                {
+                    "or": [
+                        "GDIM 61",
+                        "I&C SCI 62"
+                    ]
+                }
+            ]
+        }
     },
     "I&C SCI 169A": {
         "title": "Capstone Game Project I",
@@ -2492,10 +2798,12 @@
         "restriction": ": Seniors only. Computer Game Science Majors have first consideration for enrollment. Game Design and Interactive Media students have first consideration for enrollment. School of ICS majors given second right of consideration.",
         "grading_option": "In Progress (Letter Grade with P/NP).",
         "parsed_prerequisites": {
-            "GDIM 27": null,
-            "GDIM 61": null,
-            "I&C SCI 62": null,
-            "I&C SCI 166": null
+            "or": [
+                "GDIM 27",
+                "GDIM 61",
+                "I&C SCI 62",
+                "I&C SCI 166"
+            ]
         }
     },
     "I&C SCI 169B": {
@@ -2508,8 +2816,10 @@
         "restriction": ": Seniors only. Computer Game Science Majors have first consideration for enrollment. Game Design and Interactive Media students have first consideration for enrollment. School of ICS majors given second right of consideration.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "GDIM 167A": null,
-            "I&C SCI 169A": null
+            "or": [
+                "GDIM 167A",
+                "I&C SCI 169A"
+            ]
         }
     },
     "I&C SCI 192": {
@@ -2566,8 +2876,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 32": null,
-            "I&C SCI 32A": null
+            "or": [
+                "I&C SCI 32",
+                "I&C SCI 32A"
+            ]
         }
     },
     "IN4MATX 80": {
@@ -2601,17 +2913,23 @@
         "same_as": "COMPSCI 141.",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 51": null,
-                "CSE 31": null,
-                "EECS 31": null
-            },
-            {
-                "I&C SCI 46": null,
-                "CSE 46": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 51",
+                        "CSE 31",
+                        "EECS 31"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                }
+            ]
+        }
     },
     "IN4MATX 102": {
         "title": "Concepts of Programming Language II",
@@ -2623,9 +2941,11 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 101": null,
-            "COMPSCI 141": null,
-            "CSE 141": null
+            "or": [
+                "IN4MATX 101",
+                "COMPSCI 141",
+                "CSE 141"
+            ]
         }
     },
     "IN4MATX 113": {
@@ -2637,13 +2957,17 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 43",
-            {
-                "I&C SCI 33": null,
-                "CSE 43": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 33",
+                        "CSE 43"
+                    ]
+                },
+                "IN4MATX 43"
+            ]
+        }
     },
     "IN4MATX 115": {
         "title": "Software Testing, Analysis, and Quality Assurance",
@@ -2654,15 +2978,19 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 43",
-            {
-                "I&C SCI 45J": null,
-                "I&C SCI 45C": null,
-                "I&C SCI 46": null,
-                "CSE 46": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 45J",
+                        "I&C SCI 45C",
+                        "I&C SCI 46",
+                        "CSE 46"
+                    ]
+                },
+                "IN4MATX 43"
+            ]
+        }
     },
     "IN4MATX 117": {
         "title": "Project in Software System Design",
@@ -2673,13 +3001,17 @@
         "same_as": "N/A",
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "IN4MATX 43": null,
-                "I&C SCI 33": null
-            },
-            "CSE 43"
-        ]
+        "parsed_prerequisites": {
+            "or": [
+                {
+                    "and": [
+                        "IN4MATX 43",
+                        "I&C SCI 33"
+                    ]
+                },
+                "CSE 43"
+            ]
+        }
     },
     "IN4MATX 121": {
         "title": "Software Design: Applications",
@@ -2691,9 +3023,11 @@
         "restriction": ": Computer Science Engineering Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 33": null,
-            "CSE 43": null,
-            "GDIM 33": null
+            "or": [
+                "I&C SCI 33",
+                "CSE 43",
+                "GDIM 33"
+            ]
         }
     },
     "IN4MATX 122": {
@@ -2705,18 +3039,24 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 45J": null,
-                "I&C SCI 46": null,
-                "IN4MATX 45": null
-            },
-            {
-                "IN4MATX 101": null,
-                "COMPSCI 141": null,
-                "CSE 141": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 45J",
+                        "I&C SCI 46",
+                        "IN4MATX 45"
+                    ]
+                },
+                {
+                    "or": [
+                        "IN4MATX 101",
+                        "COMPSCI 141",
+                        "CSE 141"
+                    ]
+                }
+            ]
+        }
     },
     "IN4MATX 124": {
         "title": "Internet Applications Engineering",
@@ -2727,13 +3067,17 @@
         "same_as": "COMPSCI 137. Overlaps with COMPSCI 122B.",
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "COMPSCI 132": null,
-                "EECS 148": null
-            },
-            "I&C SCI 45J"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "COMPSCI 132",
+                        "EECS 148"
+                    ]
+                },
+                "I&C SCI 45J"
+            ]
+        }
     },
     "IN4MATX 125": {
         "title": "Computer Game Development",
@@ -2745,12 +3089,14 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "COMPSCI 112": null,
-            "COMPSCI 171": null,
-            "IN4MATX 121": null,
-            "ART 106B": null,
-            "I&C SCI 163": null,
-            "I&C SCI 166": null
+            "or": [
+                "COMPSCI 112",
+                "COMPSCI 171",
+                "IN4MATX 121",
+                "ART 106B",
+                "I&C SCI 163",
+                "I&C SCI 166"
+            ]
         }
     },
     "IN4MATX 131": {
@@ -2763,13 +3109,15 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 10": null,
-            "I&C SCI 31": null,
-            "I&C SCI 32A": null,
-            "CSE 41": null,
-            "ENGR 10": null,
-            "ENGRMAE 10": null,
-            "EECS 10": null
+            "or": [
+                "I&C SCI 10",
+                "I&C SCI 31",
+                "I&C SCI 32A",
+                "CSE 41",
+                "ENGR 10",
+                "ENGRMAE 10",
+                "EECS 10"
+            ]
         }
     },
     "IN4MATX 132": {
@@ -2793,8 +3141,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 45J": null,
-            "I&C SCI 45C": null
+            "or": [
+                "I&C SCI 45J",
+                "I&C SCI 45C"
+            ]
         }
     },
     "IN4MATX 134": {
@@ -2806,10 +3156,12 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment. Computer Science Engineering Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 131",
-            "IN4MATX 133"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "IN4MATX 131",
+                "IN4MATX 133"
+            ]
+        }
     },
     "IN4MATX 141": {
         "title": "Information Retrieval",
@@ -2820,16 +3172,22 @@
         "same_as": "COMPSCI 121.",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "I&C SCI 45C": null,
-                "I&C SCI 45J": null
-            },
-            [
-                "STATS 7",
-                "STATS 67"
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "I&C SCI 45C",
+                        "I&C SCI 45J"
+                    ]
+                },
+                {
+                    "or": [
+                        "STATS 7",
+                        "STATS 67"
+                    ]
+                }
             ]
-        ]
+        }
     },
     "IN4MATX 143": {
         "title": "Information Visualization",
@@ -2840,17 +3198,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "IN4MATX 131": null,
-                "IN4MATX 43": null
-            },
-            {
-                "I&C SCI 31": null,
-                "I&C SCI 32A": null,
-                "CSE 41": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "IN4MATX 131",
+                        "IN4MATX 43"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 31",
+                        "I&C SCI 32A",
+                        "CSE 41"
+                    ]
+                }
+            ]
+        }
     },
     "IN4MATX 148": {
         "title": "Project in Ubiquitous Computing",
@@ -2862,10 +3226,12 @@
         "restriction": ": Upper-division students only. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 10": null,
-            "I&C SCI 31": null,
-            "CSE 41": null,
-            "I&C SCI 32A": null
+            "or": [
+                "I&C SCI 10",
+                "I&C SCI 31",
+                "CSE 41",
+                "I&C SCI 32A"
+            ]
         }
     },
     "IN4MATX 151": {
@@ -2878,8 +3244,10 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 43": null,
-            "GDIM 61": null
+            "or": [
+                "IN4MATX 43",
+                "GDIM 61"
+            ]
         }
     },
     "IN4MATX 153": {
@@ -2891,17 +3259,23 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "IN4MATX 161": null,
-                "IN4MATX 43": null
-            },
-            {
-                "I&C SCI 31": null,
-                "I&C SCI 32A": null,
-                "CSE 41": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "IN4MATX 161",
+                        "IN4MATX 43"
+                    ]
+                },
+                {
+                    "or": [
+                        "I&C SCI 31",
+                        "I&C SCI 32A",
+                        "CSE 41"
+                    ]
+                }
+            ]
+        }
     },
     "IN4MATX 161": {
         "title": "Social Analysis of Computing",
@@ -2913,13 +3287,15 @@
         "restriction": ": School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "I&C SCI 10": null,
-            "I&C SCI 31": null,
-            "I&C SCI 32A": null,
-            "CSE 41": null,
-            "ENGR 10": null,
-            "EECS 10": null,
-            "ENGRMAE 10": null
+            "or": [
+                "I&C SCI 10",
+                "I&C SCI 31",
+                "I&C SCI 32A",
+                "CSE 41",
+                "ENGR 10",
+                "EECS 10",
+                "ENGRMAE 10"
+            ]
         }
     },
     "IN4MATX 162W": {
@@ -2965,11 +3341,13 @@
         "restriction": ": Upper-division students only. Satisfactory completion of the Lower-Division Writing requirement.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "WRITING 60": null,
-            "WRITING 30": null,
-            "WRITING 31": null,
-            "HUMAN 1C": null,
-            "HUMAN H1C": null
+            "or": [
+                "WRITING 60",
+                "WRITING 30",
+                "WRITING 31",
+                "HUMAN 1C",
+                "HUMAN H1C"
+            ]
         }
     },
     "IN4MATX 172": {
@@ -2982,8 +3360,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "PUBHLTH 105": null,
-            "IN4MATX 171": null
+            "or": [
+                "PUBHLTH 105",
+                "IN4MATX 171"
+            ]
         }
     },
     "IN4MATX 173": {
@@ -2996,8 +3376,10 @@
         "restriction": ": Health Informatics Minors have first consideration for enrollment. Public Health Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 171": null,
-            "PUBHLTH 105": null
+            "or": [
+                "IN4MATX 171",
+                "PUBHLTH 105"
+            ]
         }
     },
     "IN4MATX 174": {
@@ -3010,8 +3392,10 @@
         "restriction": ": Public Health Majors have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 171": null,
-            "PUBHLTH 105": null
+            "or": [
+                "IN4MATX 171",
+                "PUBHLTH 105"
+            ]
         }
     },
     "IN4MATX 190": {
@@ -3034,12 +3418,14 @@
         "same_as": "N/A",
         "restriction": ": Seniors only. Software Engineering Majors have first consideration for enrollment. Informatics Majors have first consideration for enrollment.",
         "grading_option": "In Progress (Letter Grade with P/NP).",
-        "parsed_prerequisites": [
-            "IN4MATX 113",
-            "IN4MATX 121",
-            "IN4MATX 131",
-            "IN4MATX 151"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "IN4MATX 113",
+                "IN4MATX 121",
+                "IN4MATX 131",
+                "IN4MATX 151"
+            ]
+        }
     },
     "IN4MATX 191B": {
         "title": "Senior Design Project",
@@ -3095,8 +3481,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 261": null,
-            "IN4MATX 251": null
+            "or": [
+                "IN4MATX 261",
+                "IN4MATX 251"
+            ]
         }
     },
     "IN4MATX 205": {
@@ -3109,8 +3497,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 251": null,
-            "IN4MATX 261": null
+            "or": [
+                "IN4MATX 251",
+                "IN4MATX 261"
+            ]
         }
     },
     "IN4MATX 207S": {
@@ -3177,10 +3567,12 @@
         "same_as": "COMPSCI 248B.",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 231",
-            "IN4MATX 241"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "IN4MATX 231",
+                "IN4MATX 241"
+            ]
+        }
     },
     "IN4MATX 244": {
         "title": "Introduction to Embedded and Ubiquitous Systems",
@@ -3191,17 +3583,21 @@
         "same_as": "COMPSCI 244.",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "I&C SCI 51",
-            "COMPSCI 152",
-            "COMPSCI 161",
-            {
-                "I&C SCI 6N": null,
-                "MATH 3A": null,
-                "MATH 6G": null,
-                "I&C SCI 6D": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "I&C SCI 51",
+                "COMPSCI 152",
+                "COMPSCI 161",
+                {
+                    "or": [
+                        "I&C SCI 6N",
+                        "MATH 3A",
+                        "MATH 6G",
+                        "I&C SCI 6D"
+                    ]
+                }
+            ]
+        }
     },
     "IN4MATX 251": {
         "title": "Computer-Supported Cooperative Work",
@@ -3235,8 +3631,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 251": null,
-            "IN4MATX 261": null
+            "or": [
+                "IN4MATX 251",
+                "IN4MATX 261"
+            ]
         }
     },
     "IN4MATX 265": {
@@ -3249,8 +3647,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 251": null,
-            "IN4MATX 261": null
+            "or": [
+                "IN4MATX 251",
+                "IN4MATX 261"
+            ]
         }
     },
     "IN4MATX 267": {
@@ -3263,8 +3663,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "IN4MATX 251": null,
-            "IN4MATX 261": null
+            "or": [
+                "IN4MATX 251",
+                "IN4MATX 261"
+            ]
         }
     },
     "IN4MATX 273": {
@@ -3364,10 +3766,12 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Human Comp Interact and Design Majors only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "IN4MATX 283",
-            "IN4MATX 284"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "IN4MATX 283",
+                "IN4MATX 284"
+            ]
+        }
     },
     "IN4MATX 288": {
         "title": "Capstone Project and Portfolio",
@@ -3499,13 +3903,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 7",
-            {
-                "I&C SCI 31": null,
-                "I&C SCI 32A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 7",
+                {
+                    "or": [
+                        "I&C SCI 31",
+                        "I&C SCI 32A"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 110": {
         "title": "Statistical Methods for Data Analysis I",
@@ -3516,7 +3924,20 @@
         "same_as": "N/A",
         "restriction": ": School of Info & Computer Sci students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": "{\"STATS 7\": null, \"STATS 8\": null, \"AP Statistics\": null, [\"STATS 120A\", \"STATS 120B\", \"STATS 120C\"]}"
+        "parsed_prerequisites": {
+            "or": [
+                "STATS 7",
+                "STATS 8",
+                "AP Statistics",
+                {
+                    "and": [
+                        "STATS 120A",
+                        "STATS 120B",
+                        "STATS 120C"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 111": {
         "title": "Statistical Methods for Data Analysis II",
@@ -3560,14 +3981,18 @@
         "same_as": "N/A",
         "restriction": ": Data Science Majors have first consideration for enrollment. Quantitative Economics majors have second consideration.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 2A",
-            "MATH 2B",
-            {
-                "MATH 2D": null,
-                "MATH 4": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 2A",
+                "MATH 2B",
+                {
+                    "or": [
+                        "MATH 2D",
+                        "MATH 4"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 120B": {
         "title": "Introduction to Probability and Statistics II",
@@ -3589,14 +4014,18 @@
         "same_as": "N/A",
         "restriction": ": Data Science Majors have first consideration for enrollment. Quantitative Economics majors have second consideration.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 120B",
-            {
-                "MATH 3A": null,
-                "MATH 6G": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 120B",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH 6G",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 140": {
         "title": "Multivariate Statistical Methods",
@@ -3607,13 +4036,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 120C",
-            {
-                "MATH 3A": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 120C",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 170A": {
         "title": "Project in Data Science I",
@@ -3691,8 +4124,10 @@
         "restriction": ": STATS 201 cannot be taken for credit after taking STATS 210.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "STATS 7": null,
-            "STATS 8": null
+            "or": [
+                "STATS 7",
+                "STATS 8"
+            ]
         }
     },
     "STATS 202": {
@@ -3705,8 +4140,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "STATS 201": null,
-            "STATS 210": null
+            "or": [
+                "STATS 201",
+                "STATS 210"
+            ]
         }
     },
     "STATS 203": {
@@ -3740,11 +4177,13 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Master of Data Science Degree students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "DATA 200AP",
-            "DATA 200BP",
-            "DATA 210P"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "DATA 200AP",
+                "DATA 200BP",
+                "DATA 210P"
+            ]
+        }
     },
     "STATS 210": {
         "title": "Statistical Methods I: Linear Models",
@@ -3832,10 +4271,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 220A",
-            "MATH 140B"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 220A",
+                "MATH 140B"
+            ]
+        }
     },
     "STATS 225": {
         "title": "Bayesian Statistical Analysis",
@@ -3846,10 +4287,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 205",
-            "STATS 230"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 205",
+                "STATS 230"
+            ]
+        }
     },
     "STATS 230": {
         "title": "Statistical Computing Methods",
@@ -3871,13 +4314,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 120C",
-            {
-                "MATH 3A": null,
-                "I&C SCI 6N": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 120C",
+                {
+                    "or": [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ]
+                }
+            ]
+        }
     },
     "STATS 240P": {
         "title": "Multivariate Statistical Methods",
@@ -3888,10 +4335,12 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Master of Data Science Degree students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "DATA 200AP",
-            "DATA 200BP"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "DATA 200AP",
+                "DATA 200BP"
+            ]
+        }
     },
     "STATS 245": {
         "title": "Time Series Analysis",
@@ -3913,10 +4362,12 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Master of Data Science Degree students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "DATA 200AP",
-            "DATA 200BP"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "DATA 200AP",
+                "DATA 200BP"
+            ]
+        }
     },
     "STATS 255": {
         "title": "Statistical Methods for Survival Data",
@@ -3949,10 +4400,12 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Master of Data Science Degree students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "DATA 200AP",
-            "DATA 200BP"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "DATA 200AP",
+                "DATA 200BP"
+            ]
+        }
     },
     "STATS 265": {
         "title": "Causal Inference",
@@ -3963,10 +4416,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "STATS 200C",
-            "STATS 210"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "STATS 200C",
+                "STATS 210"
+            ]
+        }
     },
     "STATS 270": {
         "title": "Stochastic Processes",
@@ -3988,10 +4443,12 @@
         "same_as": "N/A",
         "restriction": ": Graduate students only. Master of Data Science Degree students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "DATA 200AP",
-            "DATA 200BP"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "DATA 200AP",
+                "DATA 200BP"
+            ]
+        }
     },
     "STATS 275": {
         "title": "Statistical Consulting",
@@ -4003,9 +4460,11 @@
         "restriction": ": Graduate students only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "STATS 203": null,
-            "STATS 212": null,
-            "STATS 210C": null
+            "or": [
+                "STATS 203",
+                "STATS 212",
+                "STATS 210C"
+            ]
         }
     },
     "STATS 280": {
@@ -4117,9 +4576,11 @@
         "restriction": ": School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 1B": null,
-            "SAT Mathematics": null,
-            "ACT Mathematics": null
+            "or": [
+                "MATH 1B",
+                "SAT Mathematics",
+                "ACT Mathematics"
+            ]
         }
     },
     "MATH 2B": {
@@ -4132,11 +4593,13 @@
         "restriction": ": School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2A": null,
-            "MATH 5A": null,
-            "MATH 7A": null,
-            "AP Calculus AB": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2A",
+                "MATH 5A",
+                "MATH 7A",
+                "AP Calculus AB",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 2D": {
@@ -4149,10 +4612,12 @@
         "restriction": ": School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment. School of Info & Computer Sci students have first consideration for enrollment. Undeclared Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2B": null,
-            "MATH 5B": null,
-            "MATH 7B": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2B",
+                "MATH 5B",
+                "MATH 7B",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 2E": {
@@ -4165,8 +4630,10 @@
         "restriction": ": School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2D": null,
-            "MATH H2D": null
+            "or": [
+                "MATH 2D",
+                "MATH H2D"
+            ]
         }
     },
     "MATH H2D": {
@@ -4178,7 +4645,24 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": "{\"MATH 2B\": null, \"MATH 5B\": null, \"MATH 7B\": null, [\"AP Calculus BC\", {\"MATH H3A\": null, \"MATH 3A\": null}]}"
+        "parsed_prerequisites": {
+            "or": [
+                "MATH 2B",
+                "MATH 5B",
+                "MATH 7B",
+                {
+                    "and": [
+                        "AP Calculus BC",
+                        {
+                            "or": [
+                                "MATH H3A",
+                                "MATH 3A"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     },
     "MATH H2E": {
         "title": "Honors Multivariable Calculus II",
@@ -4201,10 +4685,12 @@
         "restriction": ": Undeclared Majors have first consideration for enrollment. School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2B": null,
-            "MATH 5B": null,
-            "MATH 7B": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2B",
+                "MATH 5B",
+                "MATH 7B",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 3D": {
@@ -4216,16 +4702,22 @@
         "same_as": "N/A",
         "restriction": ": School of Physical Sciences students have first consideration for enrollment. School of Engineering students have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "MATH 3A": null,
-                "MATH H3A": null
-            },
-            {
-                "MATH 2D": null,
-                "MATH H2D": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                {
+                    "or": [
+                        "MATH 2D",
+                        "MATH H2D"
+                    ]
+                }
+            ]
+        }
     },
     "MATH H3A": {
         "title": "Honors Introduction to Linear Algebra",
@@ -4237,10 +4729,12 @@
         "restriction": ": School of Physical Sciences students only. School of Engineering students only. Mathematics Majors only. Undeclared Majors only.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2B": null,
-            "MATH 5B": null,
-            "MATH 7B": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2B",
+                "MATH 5B",
+                "MATH 7B",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 5A": {
@@ -4253,9 +4747,11 @@
         "restriction": ": School of Biological Sciences students have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 1B": null,
-            "SAT Mathematics": null,
-            "ACT Mathematics": null
+            "or": [
+                "MATH 1B",
+                "SAT Mathematics",
+                "ACT Mathematics"
+            ]
         }
     },
     "MATH 5B": {
@@ -4268,11 +4764,13 @@
         "restriction": ": School of Biological Sciences students have first consideration for enrollment. Cannot be taken for credit after MATH 2B.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 5A": null,
-            "MATH 2A": null,
-            "MATH 7A": null,
-            "AP Calculus AB": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 5A",
+                "MATH 2A",
+                "MATH 7A",
+                "AP Calculus AB",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 8": {
@@ -4296,11 +4794,13 @@
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2A": null,
-            "MATH 5A": null,
-            "MATH 7A": null,
-            "AP Calculus AB": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2A",
+                "MATH 5A",
+                "MATH 7A",
+                "AP Calculus AB",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 10": {
@@ -4324,12 +4824,14 @@
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2A": null,
-            "MATH 5A": null,
-            "MATH 7A": null,
-            "I&C SCI 6D": null,
-            "AP Calculus AB": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2A",
+                "MATH 5A",
+                "MATH 7A",
+                "I&C SCI 6D",
+                "AP Calculus AB",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 99": {
@@ -4440,13 +4942,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "MATH 2E": null,
-                "MATH H2E": null
-            },
-            "MATH 3D"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2E",
+                        "MATH H2E"
+                    ]
+                },
+                "MATH 3D"
+            ]
+        }
     },
     "MATH 112B": {
         "title": "Introduction to Partial Differential Equations and Applications II",
@@ -4480,10 +4986,12 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 2B": null,
-            "MATH 5B": null,
-            "MATH 7B": null,
-            "AP Calculus BC": null
+            "or": [
+                "MATH 2B",
+                "MATH 5B",
+                "MATH 7B",
+                "AP Calculus BC"
+            ]
         }
     },
     "MATH 113B": {
@@ -4517,10 +5025,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 3D",
-            "MATH 140A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 3D",
+                "MATH 140A"
+            ]
+        }
     },
     "MATH 118": {
         "title": "The Theory of Differential Equations",
@@ -4531,10 +5041,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 3D",
-            "MATH 140A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 3D",
+                "MATH 140A"
+            ]
+        }
     },
     "MATH 120A": {
         "title": "Introduction to Abstract Algebra: Groups",
@@ -4545,10 +5057,17 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 3A",
-            "MATH 13"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13"
+            ]
+        }
     },
     "MATH 120B": {
         "title": "Introduction to Abstract Algebra: Rings and Fields",
@@ -4581,17 +5100,23 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Honors students only.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "MATH 3A": null,
-                "MATH H3A": null
-            },
-            "MATH 13",
-            {
-                "MATH 120A": null,
-                "MATH 121A": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13",
+                {
+                    "or": [
+                        "MATH 120A",
+                        "MATH 121A"
+                    ]
+                }
+            ]
+        }
     },
     "MATH H120B": {
         "title": "Honors Introduction to Graduate Algebra II",
@@ -4624,10 +5149,17 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 3A",
-            "MATH 13"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13"
+            ]
+        }
     },
     "MATH 121B": {
         "title": "Linear Algebra II",
@@ -4650,8 +5182,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 3A": null,
-            "MATH H3A": null
+            "or": [
+                "MATH 3A",
+                "MATH H3A"
+            ]
         }
     },
     "MATH 130B": {
@@ -4664,8 +5198,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 130A": null,
-            "STATS 120A": null
+            "or": [
+                "MATH 130A",
+                "STATS 120A"
+            ]
         }
     },
     "MATH 130C": {
@@ -4689,8 +5225,10 @@
         "restriction": "N/A",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 130A": null,
-            "STATS 120A": null
+            "or": [
+                "MATH 130A",
+                "STATS 120A"
+            ]
         }
     },
     "MATH 134B": {
@@ -4714,8 +5252,10 @@
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 134B": null,
-            "MATH 133A": null
+            "or": [
+                "MATH 134B",
+                "MATH 133A"
+            ]
         }
     },
     "MATH 140A": {
@@ -4727,11 +5267,23 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 2D",
-            "MATH 3A",
-            "MATH 13"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2D",
+                        "MATH H2D"
+                    ]
+                },
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13"
+            ]
+        }
     },
     "MATH 140B": {
         "title": "Elementary Analysis II",
@@ -4764,13 +5316,25 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 2E",
-            "MATH 3A",
-            "MATH 13",
-            "MATH 121A",
-            "MATH 140A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2E",
+                        "MATH H2E"
+                    ]
+                },
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13",
+                "MATH 121A",
+                "MATH 140A"
+            ]
+        }
     },
     "MATH H140B": {
         "title": "Honors Introduction to Graduate Analysis II",
@@ -4825,13 +5389,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 13",
-            [
-                "I&C SCI 6B",
-                "I&C SCI 6D"
+        "parsed_prerequisites": {
+            "or": [
+                "MATH 13",
+                {
+                    "and": [
+                        "I&C SCI 6B",
+                        "I&C SCI 6D"
+                    ]
+                }
             ]
-        ]
+        }
     },
     "MATH 161": {
         "title": "Modern Geometry",
@@ -4842,7 +5410,17 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": "{\"MATH 13\": null, [\"I&C SCI 6B\", \"I&C SCI 6D\"]}"
+        "parsed_prerequisites": {
+            "or": [
+                "MATH 13",
+                {
+                    "and": [
+                        "I&C SCI 6B",
+                        "I&C SCI 6D"
+                    ]
+                }
+            ]
+        }
     },
     "MATH 162A": {
         "title": "Introduction to Differential Geometry I",
@@ -4853,13 +5431,17 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "MATH 2E": null,
-                "MATH H2E": null
-            },
-            "MATH 3D"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2E",
+                        "MATH H2E"
+                    ]
+                },
+                "MATH 3D"
+            ]
+        }
     },
     "MATH 162B": {
         "title": "Introduction to Differential Geometry II",
@@ -4881,25 +5463,35 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            {
-                "MATH 2B": null,
-                "MATH 5B": null,
-                "MATH 7B": null,
-                "AP Calculus BC": null
-            },
-            {
-                "MATH 3A": null,
-                "MATH H3A": null
-            },
-            [
-                "MATH 13",
-                [
-                    "I&C SCI 6B",
-                    "I&C SCI 6D"
-                ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2B",
+                        "MATH 5B",
+                        "MATH 7B",
+                        "AP Calculus BC"
+                    ]
+                },
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                {
+                    "or": [
+                        "MATH 13",
+                        {
+                            "and": [
+                                "I&C SCI 6B",
+                                "I&C SCI 6D"
+                            ]
+                        }
+                    ]
+                }
             ]
-        ]
+        }
     },
     "MATH 173B": {
         "title": "Introduction to Cryptology II",
@@ -4921,15 +5513,19 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 13",
-            {
-                "MATH 2B": null,
-                "MATH 5B": null,
-                "MATH 7B": null,
-                "AP Calculus BC": null
-            }
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 2B",
+                        "MATH 5B",
+                        "MATH 7B",
+                        "AP Calculus BC"
+                    ]
+                },
+                "MATH 13"
+            ]
+        }
     },
     "MATH 176": {
         "title": "Mathematics of Finance",
@@ -4941,8 +5537,10 @@
         "restriction": ": Business Economics Majors have first consideration for enrollment. Economics Majors have first consideration for enrollment. Quantitative Economics Majors have first consideration for enrollment. Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 3A": null,
-            "MATH H3A": null
+            "or": [
+                "MATH 3A",
+                "MATH H3A"
+            ]
         }
     },
     "MATH 178": {
@@ -4954,11 +5552,13 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 10",
-            "MATH 121A",
-            "MATH 140A"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 10",
+                "MATH 121A",
+                "MATH 140A"
+            ]
+        }
     },
     "MATH 180A": {
         "title": "Number Theory I",
@@ -4969,10 +5569,17 @@
         "same_as": "N/A",
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 3A",
-            "MATH 13"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                {
+                    "or": [
+                        "MATH 3A",
+                        "MATH H3A"
+                    ]
+                },
+                "MATH 13"
+            ]
+        }
     },
     "MATH 180B": {
         "title": "Number Theory II",
@@ -5039,9 +5646,11 @@
         "restriction": ": Mathematics Majors have first consideration for enrollment.",
         "grading_option": "N/A",
         "parsed_prerequisites": {
-            "MATH 120A": null,
-            "MATH 121A": null,
-            "MATH 140A": null
+            "or": [
+                "MATH 120A",
+                "MATH 121A",
+                "MATH 140A"
+            ]
         }
     },
     "MATH 199A": {
@@ -5581,10 +6190,12 @@
         "same_as": "N/A",
         "restriction": "N/A",
         "grading_option": "N/A",
-        "parsed_prerequisites": [
-            "MATH 210C",
-            "MATH 220C"
-        ]
+        "parsed_prerequisites": {
+            "and": [
+                "MATH 210C",
+                "MATH 220C"
+            ]
+        }
     },
     "MATH 260B": {
         "title": "Functional Analysis",
