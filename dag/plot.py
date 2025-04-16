@@ -145,7 +145,8 @@ class CourseDAGVisualizer:
         
         # Use a hierarchical layout to better show the prerequisite flow
         # pos = nx.spring_layout(self.G, seed=42)  # Random layout
-        pos = nx.spring_layout(self.G, seed=42)
+        # pip install pygraphviz networkx matplotlib numpy
+        pos = nx.nx_agraph.graphviz_layout(self.G, prog='dot')  # Hierarchical layout
         
         # Draw regular nodes (courses)
         course_nodes = [node for node in self.G.nodes() if not node.startswith("OR_GROUP_")]
