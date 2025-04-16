@@ -86,3 +86,13 @@ If you want to switch to one of these alternatives, the best approach would be:
 1. Keep the current Python code for parsing prerequisites and building the graph structure
 2. Add an export function to output the graph in a format compatible with your chosen tool
 3. Use the alternative tool for visualization only
+
+
+
+I will be using Cytoscape.js for dag visualization for all the prereqs needed for certain classes. Write a program that will convert all the prereqs into its readable format so it can graph out DAG's of all prereqs for a inputted class. Based on the json Course Data with logical prereq.json file. You may use any library that you may like.
+
+AND relationship should just be arrows that points to the class that are prereq for another. 
+
+OR relationship is a little weird since they are alternative of other classes you could take. Basically. Just group them (or in a sense compound them up) up into 1 category like a in its own box/bubble with dashed lines around all of them. And that dashed line bubble is considered a "compound node"/class to pick, and that itself points the the class that it is a prereq for as the OR statement between them.
+
+It should graph out all the relationship, so the prereq classes should have prereq too and graph them as well so it should become a whole tree.
