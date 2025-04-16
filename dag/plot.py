@@ -136,24 +136,42 @@ class CourseDAGVisualizer:
         return []
     
     def visualize(self, target_course, output_file=None):
-        """Visualize the prerequisite graph."""
+        """Visualize the prerequisite graph with improved layout."""
         if not self.G.nodes():
             print("No graph to visualize. Build the graph first.")
             return
         
-        plt.figure(figsize=(14, 10))
+        plt.figure(figsize=(16, 12))
         
-        # Use a hierarchical layout to better show the prerequisite flow
-        # pos = nx.spring_layout(self.G, seed=42)  # Random layout
-        # pip install pygraphviz networkx matplotlib numpy
-        pos = nx.nx_agraph.graphviz_layout(self.G, prog='dot')  # Hierarchical layout
+        # Choose a better layout algorithm based on graph size
+        num_nodes = len(self.G.nodes())
+        
+        if num_nodes <= 15:
+            # For small graphs, use a hierarchical layout
+            try:
+                # Try to use graphviz for best hierarchical layout
+                pos = nx.nx_agraph.graphviz_layout(self.G, prog='dot', args='-Grankdir=LR')
+            except:
+                # Fall back to a custom layered approach if graphviz is not available
+                pos = self._custom_layered_layout(target_course)
+        else:
+            # For larger graphs, use specialized layouts
+            if num_nodes <= 30:
+                # Medium-sized graphs use Kamada-Kawai for nice spacing
+                pos = nx.kamada_kawai_layout(self.G)
+            else:
+                # Large graphs use ForceAtlas2 inspired layout
+                pos = nx.spring_layout(self.G, k=1.5/np.sqrt(num_nodes), iterations=100, seed=42)
+        
+        # Increase spacing between nodes
+        pos = {node: (x*1.5, y*1.5) for node, (x, y) in pos.items()}
         
         # Draw regular nodes (courses)
         course_nodes = [node for node in self.G.nodes() if not node.startswith("OR_GROUP_")]
         nx.draw_networkx_nodes(self.G, pos, 
                                nodelist=course_nodes,
                                node_color='skyblue', 
-                               node_size=2000, 
+                               node_size=2500, 
                                alpha=0.8)
         
         # Highlight the target course
@@ -161,35 +179,39 @@ class CourseDAGVisualizer:
             nx.draw_networkx_nodes(self.G, pos,
                                   nodelist=[target_course],
                                   node_color='green',
-                                  node_size=2000,
+                                  node_size=3000,
                                   alpha=0.8)
         
         # Draw edges with arrows pointing TO the course that requires the prerequisite
         nx.draw_networkx_edges(self.G, pos, 
                                arrows=True,
                                arrowstyle='-|>',
-                               width=1.5)
+                               width=1.5,
+                               arrowsize=20,
+                               edge_color='gray',
+                               alpha=0.7)
         
-        # Draw labels for all nodes
-        nx.draw_networkx_labels(self.G, pos, font_size=10)
+        # Draw labels for all nodes with improved readability
+        node_labels = {node: self._format_node_label(node) for node in self.G.nodes()}
+        nx.draw_networkx_labels(self.G, pos, labels=node_labels, font_size=11, font_weight='bold')
         
-        # Draw OR groups as dashed outlines
+        # Draw OR groups as dashed outlines with better formatting
         for group_name, members in self.or_groups:
             if group_name in self.G.nodes():
                 # Get positions of all members in the group
                 member_positions = [pos[member] for member in members if member in pos]
                 
                 if member_positions:
-                    # Create a polygon around all members
+                    # Create a polygon around all members with more padding
                     x_coords = [p[0] for p in member_positions]
                     y_coords = [p[1] for p in member_positions]
                     
-                    # Add some padding
-                    padding = 0.05
+                    # Add generous padding
+                    padding = 0.15
                     min_x, max_x = min(x_coords) - padding, max(x_coords) + padding
                     min_y, max_y = min(y_coords) - padding, max(y_coords) + padding
                     
-                    # Create rectangle corners
+                    # Create rounded rectangle corners
                     rect_coords = np.array([
                         [min_x, min_y],
                         [max_x, min_y],
@@ -199,21 +221,31 @@ class CourseDAGVisualizer:
                     
                     # Draw the rectangle with dashed lines
                     polygon = Polygon(rect_coords, closed=True, 
-                                    fill=False, 
+                                    fill=True, 
+                                    facecolor='mistyrose',
                                     linestyle='dashed',
                                     edgecolor='red',
-                                    linewidth=2)
+                                    linewidth=2,
+                                    alpha=0.2)
                     plt.gca().add_patch(polygon)
                     
-                    # Add a label for the OR group
+                    # Add a more visible label for the OR group
                     center_x = (min_x + max_x) / 2
                     center_y = (min_y + max_y) / 2
-                    plt.text(center_x, min_y - 0.05, "OR", 
-                             fontsize=12, color='red',
+                    plt.text(center_x, min_y - 0.1, "OR", 
+                             fontsize=14, color='red', fontweight='bold',
+                             bbox=dict(facecolor='white', alpha=0.7, edgecolor='red', boxstyle='round,pad=0.3'),
                              horizontalalignment='center')
         
-        plt.title(f"Full Prerequisite Tree for {target_course}")
+        # Add title and improve overall appearance
+        plt.title(f"Prerequisite Tree for {target_course}", fontsize=16, fontweight='bold', pad=20)
         plt.axis('off')
+        plt.tight_layout(pad=2.0)
+        
+        # Add a legend or explanation
+        legend_text = "Green: Target Course\nBlue: Prerequisite Courses\nRed Dashed Box: 'OR' Relationship (any one course satisfies the requirement)"
+        plt.figtext(0.01, 0.01, legend_text, fontsize=11, 
+                   bbox=dict(facecolor='white', alpha=0.8, edgecolor='gray', boxstyle='round,pad=0.5'))
         
         if output_file:
             directory = os.path.dirname(output_file)
@@ -224,18 +256,75 @@ class CourseDAGVisualizer:
         else:
             plt.tight_layout()
             plt.show()
+    
+    def _format_node_label(self, node):
+        """Format node labels for better readability."""
+        if node.startswith("OR_GROUP_"):
+            return ""
+        return node
+    
+    def _custom_layered_layout(self, target_course):
+        """Create a custom layered layout when graphviz is not available."""
+        # Create layers based on distance from target course
+        layers = {}
+        visited = set()
+        
+        # BFS to determine distance from target
+        queue = [(target_course, 0)]  # (node, distance)
+        visited.add(target_course)
+        
+        while queue:
+            node, distance = queue.pop(0)
+            if distance not in layers:
+                layers[distance] = []
+            layers[distance].append(node)
+            
+            # Process neighbors (prerequisites)
+            for prereq in self.G.predecessors(node):
+                if prereq not in visited:
+                    queue.append((prereq, distance + 1))
+                    visited.add(prereq)
+        
+        # Create positions based on layers
+        pos = {}
+        max_layer = max(layers.keys()) if layers else 0
+        
+        for layer_num, nodes in layers.items():
+            # Reverse the layers so target is on the right
+            x_pos = 1 - (layer_num / (max_layer + 1))
+            
+            # Distribute nodes vertically in their layer
+            n_nodes = len(nodes)
+            for i, node in enumerate(nodes):
+                if n_nodes == 1:
+                    y_pos = 0.5
+                else:
+                    y_pos = i / (n_nodes - 1) if n_nodes > 1 else 0.5
+                pos[node] = (x_pos, y_pos)
+        
+        return pos
 
 # Main code
 if __name__ == "__main__":
-    # MODIFY THIS SECTION TO SPECIFY THE COURSE YOU WANT TO VISUALIZE
-    course_to_visualize = "IN4MATX 191B"  # Replace with your desired course ID
-    output_file = "course_graphs/full_prereq_tree.png"  # Optional: specify None to display instead of saving
+    # Choose a course to visualize
+    course_to_visualize = "IN4MATX 191B"  # Popular course with prerequisites
+    output_dir = "course_graphs"
+    output_file = os.path.join(output_dir, f"{course_to_visualize.replace(' ', '_')}_prereqs.png")
     max_depth = 10  # Maximum depth for recursion
     
     # Initialize the visualizer
     visualizer = CourseDAGVisualizer()
     
     # Build and visualize the complete prerequisite tree
+    if visualizer.build_prereq_tree(course_to_visualize, max_depth):
+        visualizer.visualize(course_to_visualize, output_file)
+    else:
+        print(f"Unable to build prerequisite tree for {course_to_visualize}")
+        
+    # Try another example with more complex prerequisites
+    course_to_visualize = "COMPSCI 143B"
+    output_file = os.path.join(output_dir, f"{course_to_visualize.replace(' ', '_')}_prereqs.png")
+    
     if visualizer.build_prereq_tree(course_to_visualize, max_depth):
         visualizer.visualize(course_to_visualize, output_file)
     else:

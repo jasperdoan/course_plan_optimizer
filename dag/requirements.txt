@@ -4,4 +4,5 @@ beautifulsoup4>=4.12.2
 networkx==2.8.8
 matplotlib==3.7.1
 numpy==1.24.3
+pygraphviz==1.10  # For hierarchical graph layouts (optional)
 python-dotenv==0.21.1
